@@ -57,6 +57,7 @@ namespace MusicHub.Controllers
 
                 WebSecurity.CreateUserAndAccount(model.UserName, model.Password, user);
                 WebSecurity.Login(model.UserName, model.Password);
+                return Redirect("User/Profile");
             }
 
             return View(model);
@@ -65,7 +66,7 @@ namespace MusicHub.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-            return Redirect("");
+            return Redirect("Home/Index");
         }
 
     }

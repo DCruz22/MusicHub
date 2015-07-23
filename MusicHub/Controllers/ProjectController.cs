@@ -6,15 +6,10 @@ using System.Web.Mvc;
 
 namespace MusicHub.Controllers
 {
-    public class UserController : Controller
+    public class ProjectController : Controller
     {
-        // GET: User
+        // GET: Project
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult Profile()
         {
             return View();
         }

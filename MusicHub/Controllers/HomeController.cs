@@ -13,5 +13,10 @@ namespace MusicHub.Controllers
         {
             return View();
         }
+
+        public ActionResult Results(string search)
+        {
+            return View();
+        }
     }
 }
