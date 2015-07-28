@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DAL.Framework
+{
+    class UnitOfWork
+    {
+        MusicHub.Models.MusicHubDB context = null;
+
+        public UnitOfWork()
+        {
+            context = new MusicHub.Models.MusicHubDB();
+        }
+    }
+}
