@@ -16,6 +16,7 @@ namespace MusicHub.Controllers
 
         public ActionResult Results(string search)
         {
+            ViewBag.Result = search;
             return View();
         }
     }

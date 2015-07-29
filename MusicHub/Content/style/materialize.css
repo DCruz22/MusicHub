@@ -2014,7 +2014,7 @@ ul {
 .z-depth-3 {
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); }
 
-.z-depth-4, .modal {
+.z-depth-4, .moMusicHub.Data.Reps {
   box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21); }
 
 .z-depth-5 {
@@ -6005,7 +6005,7 @@ button.btn-floating {
 a.waves-effect .waves-ripple {
   z-index: -1; }
 
-.modal {
+.moMusicHub.Data.Reps {
   display: none;
   position: fixed;
   left: 0;
@@ -6019,21 +6019,21 @@ a.waves-effect .waves-ripple {
   border-radius: 2px;
   will-change: top, opacity; }
   @media only screen and (max-width : 992px) {
-    .modal {
+    .moMusicHub.Data.Reps {
       width: 80%; } }
-  .modal h1, .modal h2, .modal h3, .modal h4 {
+  .moMusicHub.Data.Reps h1, .moMusicHub.Data.Reps h2, .moMusicHub.Data.Reps h3, .moMusicHub.Data.Reps h4 {
     margin-top: 0; }
-  .modal .modal-content {
+  .moMusicHub.Data.Reps .moMusicHub.Data.Reps-content {
     padding: 24px; }
-  .modal .modal-close {
+  .moMusicHub.Data.Reps .moMusicHub.Data.Reps-close {
     cursor: pointer; }
-  .modal .modal-footer {
+  .moMusicHub.Data.Reps .moMusicHub.Data.Reps-footer {
     border-radius: 0 0 2px 2px;
     background-color: #fafafa;
     padding: 4px 6px;
     height: 56px;
     width: 100%; }
-    .modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
+    .moMusicHub.Data.Reps .moMusicHub.Data.Reps-footer .btn, .moMusicHub.Data.Reps .moMusicHub.Data.Reps-footer .btn-large, .moMusicHub.Data.Reps .moMusicHub.Data.Reps-footer .btn-flat {
       float: right;
       margin: 6px 0; }
 
@@ -6050,21 +6050,21 @@ a.waves-effect .waves-ripple {
   display: none;
   will-change: opacity; }
 
-.modal.modal-fixed-footer {
+.moMusicHub.Data.Reps.moMusicHub.Data.Reps-fixed-footer {
   padding: 0;
   height: 70%; }
-  .modal.modal-fixed-footer .modal-content {
+  .moMusicHub.Data.Reps.moMusicHub.Data.Reps-fixed-footer .moMusicHub.Data.Reps-content {
     position: absolute;
     height: calc(100% - 56px);
     max-height: 100%;
     width: 100%;
     overflow-y: auto; }
-  .modal.modal-fixed-footer .modal-footer {
+  .moMusicHub.Data.Reps.moMusicHub.Data.Reps-fixed-footer .moMusicHub.Data.Reps-footer {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     position: absolute;
     bottom: 0; }
 
-.modal.bottom-sheet {
+.moMusicHub.Data.Reps.bottom-sheet {
   top: auto;
   bottom: -100%;
   margin: 0;

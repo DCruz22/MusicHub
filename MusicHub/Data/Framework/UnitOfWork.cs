@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MusicHub.Models;
 
-namespace DAL.Framework
+namespace MusicHub.Data.Framework
 {
     class UnitOfWork
     {
-        MusicHub.Models.MusicHubDB context = null;
+        MusicHubDB context = null;
 
         public UnitOfWork()
         {
-            context = new MusicHub.Models.MusicHubDB();
+            context = new MusicHubDB();
         }
     }
 }

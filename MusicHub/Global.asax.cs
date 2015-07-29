@@ -5,6 +5,8 @@ using System.Web;
 using WebMatrix.WebData;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Optimization;
+using MusicHub.App_Start;
 
 namespace MusicHub
 {
@@ -12,10 +14,11 @@ namespace MusicHub
     {
         protected void Application_Start()
         {
-            WebSecurity.InitializeDatabaseConnection("AzureCon", "User", "UserId", "UserName", true);
+            WebSecurity.InitializeDatabaseConnection("AzureCon", "Users", "UserId", "UserName", true);
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

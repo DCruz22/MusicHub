@@ -41,11 +41,12 @@ namespace MusicHub.ViewModels
         public DateTime JoinDate { get; set; }
 
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "")]
-        [MaxLength(200, ErrorMessage = "")]
+        [Required]
+        [Display(Name = "About me")]
+        [MaxLength(300)]
         public string AboutMe { get; set; }
 
         public string PhotoUrl { get; set; }
@@ -56,9 +57,10 @@ namespace MusicHub.ViewModels
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "The passwords do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }

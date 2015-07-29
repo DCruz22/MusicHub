@@ -59,19 +59,19 @@ namespace MusicHub.App_Start
 
             bundles.Add(new StyleBundle("~/Content/css-style").Include(
                       //"~/Content/style/bootstrap.*",
-                      "~/Content/style/materialize.*",
-                      "~/Content/style/Layout.css",
-                      "~/Content/style/style.css",
-                      "~/Content/style/jquery.snippet.*",
-                      "~/Content/style/jquery.pageslide.*",
-                      "~/Content/style/font-awesome.*",
-                      "~/Content/style/tagit.ui-zendesk.css",
-                      "~/Content/style/jquery.tagit.css",
-                      "~/Content/style/dropzone.css",
-                      "~/Content/style/ilightbox.css",
-                      "~/Content/style/jquery-ui.*",
-                      "~/Content/style/jquery.pnotify.default.css",
-                      "~/Content/style/jquery.pnotify.default.icons.css"));
+                      "~/Content/style/materialize.*"
+                      //"~/Content/style/Layout.css",
+                      //"~/Content/style/style.css",
+                      //"~/Content/style/jquery.snippet.*",
+                      //"~/Content/style/jquery.pageslide.*",
+                      //"~/Content/style/font-awesome.*",
+                      //"~/Content/style/tagit.ui-zendesk.css",
+                      //"~/Content/style/jquery.tagit.css",
+                      //"~/Content/style/dropzone.css",
+                      //"~/Content/style/ilightbox.css",
+                      //"~/Content/style/jquery-ui.*",
+                      //"~/Content/style/jquery.pnotify.default.css",
+                      /*"~/Content/style/jquery.pnotify.default.icons.css"*/));
 
             bundles.Add(new StyleBundle("~/Content/css-account").Include(
                       "~/Content/style/style-account.css",

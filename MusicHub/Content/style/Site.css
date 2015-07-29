@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 0%;
     padding-bottom: 20px;
 }
 
@@ -27,6 +27,14 @@ textarea {
 
 input.input-validation-error {
     border: 1px solid #b94a48;
+}
+
+.valid{
+    border-color: rgb(124, 124, 239) !important;
+}
+
+.input-validation-error{
+    border-color: red !important;
 }
 
 input[type="checkbox"].input-validation-error {
