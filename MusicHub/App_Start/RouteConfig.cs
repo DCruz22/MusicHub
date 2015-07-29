@@ -18,6 +18,12 @@ namespace MusicHub
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Logged",
+                url: "{controller}/{action}/{user}",
+                defaults: new { controller = "User", action = "Notebook", user = UrlParameter.Optional }
+            );
         }
     }
 }

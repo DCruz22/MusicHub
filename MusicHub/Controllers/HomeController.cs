@@ -18,17 +18,17 @@ namespace MusicHub.Controllers
         private ProjectsRepository _projrep = new ProjectsRepository();
         private UserRepository _usrrep = new UserRepository();
 
+        [SeguridadAuthorize()]
         public ActionResult Index()
         {
             return View();
         }
 
-        public async Task<ActionResult> Results(string search, string type)
+        public async Task<ActionResult> Results(string search)
         {
-            var projects = await _projrep.FilterAsync(x => x.ProjectName.Contains(search));
-
+            SearchProjectsAlgorithm searchProj = new SearchProjectsAlgorithm(search);
             ViewBag.Result = search;
-            return View();
+            return View(await searchProj.SearchProjectsAsync());
         }
     }
 }

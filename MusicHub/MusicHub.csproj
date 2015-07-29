@@ -297,7 +297,9 @@
     <Compile Include="Models\User_MusicalStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ProjectContentViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
+    <Compile Include="ViewModels\Project_CommentViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +314,9 @@
     <Content Include="Views\Shared\_Result_Layout.cshtml" />
     <Content Include="Views\Shared\_Logged_Layout.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Project\Details.cshtml" />
+    <Content Include="Views\Project\Comment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -321,7 +326,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Project\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201507110621120_first.resx">

@@ -19,6 +19,7 @@ namespace MusicHub.Controllers
         private CountriesRepository _country = new CountriesRepository();
         private GendersRepository _gender = new GendersRepository();
 
+        [SeguridadAuthorize()]
         public ActionResult Login()
         {
             return View(new LoginModel());
@@ -38,7 +39,7 @@ namespace MusicHub.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+        [SeguridadAuthorize()]
         public ActionResult Register()
         {
             ViewBag.GenderId = new SelectList(_gender.All(), "GenderId", "GenderName");
@@ -48,6 +49,7 @@ namespace MusicHub.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken()]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
