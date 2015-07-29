@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f3aeafb086ad4549847c3bd930f4e4c5" Name="Diagram1">
+        <EntityTypeShape EntityType="MusicHubModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Badges" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Countries" Width="1.5" PointX="0.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Friendships" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Genders" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Instruments" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.MusicalStyles" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Notifications" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Project_Comments" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Project_Contents" Width="1.5" PointX="8.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Project_Followers" Width="1.5" PointX="8.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Project_Instruments" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Projects" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.User" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.User_Badges" Width="1.5" PointX="5.25" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.User_Instruments" Width="1.5" PointX="11.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.User_MusicalStyles" Width="1.5" PointX="8.25" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.Users" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.webpages_Membership" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.webpages_OAuthMembership" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicHubModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_User_Badges_dbo_Badges_BadgeId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Users_dbo_Countries_CountryId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Friendships_dbo_Users_UserId_follower" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Friendships_dbo_Users_UserId_following" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Users_dbo_Genders_GenderId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Project_Instruments_dbo_Instruments_InstrumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_User_Instruments_dbo_Instruments_InstrumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Projects_dbo_MusicalStyles_MusicalStyleId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_User_MusicalStyles_dbo_MusicalStyles_MusicalStyleId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Notifications_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Project_Comments_dbo_Projects_ProjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Project_Comments_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Project_Contents_dbo_Projects_ProjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Project_Contents_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Project_Followers_dbo_Projects_ProjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Project_Followers_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Project_Instruments_dbo_Projects_ProjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_Projects_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_User_Badges_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_User_Instruments_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.FK_dbo_User_MusicalStyles_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicHubModel.webpages_UsersInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

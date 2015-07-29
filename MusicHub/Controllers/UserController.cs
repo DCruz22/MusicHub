@@ -14,7 +14,13 @@ namespace MusicHub.Controllers
             return View();
         }
 
-        public ActionResult Profile()
+        [ActionName("Profile")]
+        public ActionResult User_Profile()
+        {
+            return View();
+        }
+
+        public ActionResult Suggestions()
         {
             return View();
         }

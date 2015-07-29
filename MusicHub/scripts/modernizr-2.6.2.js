@@ -1027,7 +1027,7 @@ window.Modernizr = (function( window, document, undefined ) {
     modElem = inputElem = null;
 
     /*>>shiv*/
-    /*! HTML5 Shiv v3.6.1 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed */
+    /*! HTML5 Shiv v3.6.1 | @afarkas @jMusicHub.Data.Repston @jon_neal @rem | MIT/GPL2 Licensed */
     ;(function(window, document) {
     /*jshint evil:true */
       /** Preset options */

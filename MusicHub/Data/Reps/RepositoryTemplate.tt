@@ -1,0 +1,59 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true"#>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@ import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ include file="EF.Utility.CS.ttinclude"#>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ Import Namespace="System.Windows.Forms" #>
+<#@ output extension=".cs"#>
+<# PluralizationService pluralizer = PluralizationService.CreateService(new CultureInfo("en-US")); #>
+<#
+
+// This needs to be set to the .edmx file that you want to process.
+string edmxFile = @"../../db.edmx";
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+MetadataTools tools = new MetadataTools(this);
+EdmItemCollection designerObjects = loader.CreateEdmItemCollection(edmxFile);
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this);
+
+string types = String.Empty;
+foreach (var item in designerObjects.GetItems<EntityType>())
+{
+	fileManager.StartNewFile(GetFileName(item.Name));
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+using MusicHub.Data.Reps;
+
+namespace MusicHub.Data.Reps.Reps
+{ 
+
+	public class <#= item.Name #>Repository : Framework.BaseObject<<#= item.Name #>>
+	{
+		
+        public <#= item.Name #>Repository() : base() { }
+        public <#= item.Name #>Repository(MusicHubDB cont) : base(cont) { }
+
+        public override <#= item.Name #> GetById(int id)
+        {
+            return db.<#=pluralizer.Pluralize(item.Name)#>.FirstOrDefault(x => x.<#= item.Name #>_id == id);
+        }
+		
+	}
+}
+<#
+}
+	fileManager.Process();
+#>
+<#+
+	private string GetFileName(string entityName)
+	{
+		return String.Format(@"{0}Repository.cs", entityName);
+	}
+#>

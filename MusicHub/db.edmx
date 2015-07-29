@@ -1,0 +1,1544 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MusicHubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Badges">
+          <Key>
+            <PropertyRef Name="BadgeId" />
+          </Key>
+          <Property Name="BadgeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BadgeTitle" Type="nvarchar(max)" />
+          <Property Name="BadgeDescription" Type="nvarchar(max)" />
+          <Property Name="BadgeImageUrl" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar(max)" />
+          <Property Name="CountryCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Friendships">
+          <Key>
+            <PropertyRef Name="FriendshipId" />
+          </Key>
+          <Property Name="FriendshipId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId_follower" Type="int" Nullable="false" />
+          <Property Name="UserId_following" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenderName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Instruments">
+          <Key>
+            <PropertyRef Name="InstrumentId" />
+          </Key>
+          <Property Name="InstrumentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstrumentName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="InstrumentType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MusicalStyles">
+          <Key>
+            <PropertyRef Name="MusicalStyleId" />
+          </Key>
+          <Property Name="MusicalStyleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MusicalStyleName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NotificationName" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="NotificationDescription" Type="nvarchar(max)" />
+          <Property Name="NotificationType" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Project_Comments">
+          <Key>
+            <PropertyRef Name="Project_CommentId" />
+          </Key>
+          <Property Name="Project_CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CommentType" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project_Contents">
+          <Key>
+            <PropertyRef Name="Project_ContentId" />
+          </Key>
+          <Property Name="Project_ContentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="ContentType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project_Followers">
+          <Key>
+            <PropertyRef Name="Project_FollowerId" />
+          </Key>
+          <Property Name="Project_FollowerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project_Instruments">
+          <Key>
+            <PropertyRef Name="Project_InstrumentId" />
+          </Key>
+          <Property Name="Project_InstrumentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="InstrumentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProjectDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="MusicalStyleId" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="56" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Badges">
+          <Key>
+            <PropertyRef Name="User_BadgeId" />
+          </Key>
+          <Property Name="User_BadgeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="BadgeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Instruments">
+          <Key>
+            <PropertyRef Name="User_InstrumentId" />
+          </Key>
+          <Property Name="User_InstrumentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="InstrumentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_MusicalStyles">
+          <Key>
+            <PropertyRef Name="User_MusicalStyleId" />
+          </Key>
+          <Property Name="User_MusicalStyleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="MusicalStyleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="15" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="BirthDate" Type="datetime" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="JoinDate" Type="datetime" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="AboutMe" Type="nvarchar(max)" />
+          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="PhotoUrl" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Friendships_dbo_Users_UserId_follower">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Friendships" Type="Self.Friendships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Friendships">
+              <PropertyRef Name="UserId_follower" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Friendships_dbo_Users_UserId_following">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Friendships" Type="Self.Friendships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Friendships">
+              <PropertyRef Name="UserId_following" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Notifications_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Comments_dbo_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Comments" Type="Self.Project_Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Project_Comments">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Comments_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Comments" Type="Self.Project_Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Project_Comments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Contents_dbo_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Contents" Type="Self.Project_Contents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Project_Contents">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Contents_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Contents" Type="Self.Project_Contents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Project_Contents">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Followers_dbo_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Followers" Type="Self.Project_Followers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Project_Followers">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Followers_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Followers" Type="Self.Project_Followers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Project_Followers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Instruments_dbo_Instruments_InstrumentId">
+          <End Role="Instruments" Type="Self.Instruments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Instruments" Type="Self.Project_Instruments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instruments">
+              <PropertyRef Name="InstrumentId" />
+            </Principal>
+            <Dependent Role="Project_Instruments">
+              <PropertyRef Name="InstrumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Instruments_dbo_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Instruments" Type="Self.Project_Instruments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Project_Instruments">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Projects_dbo_MusicalStyles_MusicalStyleId">
+          <End Role="MusicalStyles" Type="Self.MusicalStyles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MusicalStyles">
+              <PropertyRef Name="MusicalStyleId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="MusicalStyleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Projects_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_Badges_dbo_Badges_BadgeId">
+          <End Role="Badges" Type="Self.Badges" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Badges" Type="Self.User_Badges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Badges">
+              <PropertyRef Name="BadgeId" />
+            </Principal>
+            <Dependent Role="User_Badges">
+              <PropertyRef Name="BadgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_Badges_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Badges" Type="Self.User_Badges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User_Badges">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_Instruments_dbo_Instruments_InstrumentId">
+          <End Role="Instruments" Type="Self.Instruments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Instruments" Type="Self.User_Instruments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instruments">
+              <PropertyRef Name="InstrumentId" />
+            </Principal>
+            <Dependent Role="User_Instruments">
+              <PropertyRef Name="InstrumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_Instruments_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Instruments" Type="Self.User_Instruments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User_Instruments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_MusicalStyles_dbo_MusicalStyles_MusicalStyleId">
+          <End Role="MusicalStyles" Type="Self.MusicalStyles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_MusicalStyles" Type="Self.User_MusicalStyles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MusicalStyles">
+              <PropertyRef Name="MusicalStyleId" />
+            </Principal>
+            <Dependent Role="User_MusicalStyles">
+              <PropertyRef Name="MusicalStyleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_MusicalStyles_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_MusicalStyles" Type="Self.User_MusicalStyles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User_MusicalStyles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Countries_CountryId">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Genders_GenderId">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicHubModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Badges" EntityType="Self.Badges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Friendships" EntityType="Self.Friendships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instruments" EntityType="Self.Instruments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MusicalStyles" EntityType="Self.MusicalStyles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project_Comments" EntityType="Self.Project_Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project_Contents" EntityType="Self.Project_Contents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project_Followers" EntityType="Self.Project_Followers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project_Instruments" EntityType="Self.Project_Instruments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Badges" EntityType="Self.User_Badges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Instruments" EntityType="Self.User_Instruments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_MusicalStyles" EntityType="Self.User_MusicalStyles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Friendships_dbo_Users_UserId_follower" Association="Self.FK_dbo_Friendships_dbo_Users_UserId_follower">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Friendships" EntitySet="Friendships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Friendships_dbo_Users_UserId_following" Association="Self.FK_dbo_Friendships_dbo_Users_UserId_following">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Friendships" EntitySet="Friendships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Notifications_dbo_Users_UserId" Association="Self.FK_dbo_Notifications_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Comments_dbo_Projects_ProjectId" Association="Self.FK_dbo_Project_Comments_dbo_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Project_Comments" EntitySet="Project_Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Comments_dbo_Users_UserId" Association="Self.FK_dbo_Project_Comments_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Project_Comments" EntitySet="Project_Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Contents_dbo_Projects_ProjectId" Association="Self.FK_dbo_Project_Contents_dbo_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Project_Contents" EntitySet="Project_Contents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Contents_dbo_Users_UserId" Association="Self.FK_dbo_Project_Contents_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Project_Contents" EntitySet="Project_Contents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Followers_dbo_Projects_ProjectId" Association="Self.FK_dbo_Project_Followers_dbo_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Project_Followers" EntitySet="Project_Followers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Followers_dbo_Users_UserId" Association="Self.FK_dbo_Project_Followers_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Project_Followers" EntitySet="Project_Followers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Instruments_dbo_Instruments_InstrumentId" Association="Self.FK_dbo_Project_Instruments_dbo_Instruments_InstrumentId">
+            <End Role="Instruments" EntitySet="Instruments" />
+            <End Role="Project_Instruments" EntitySet="Project_Instruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Instruments_dbo_Projects_ProjectId" Association="Self.FK_dbo_Project_Instruments_dbo_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Project_Instruments" EntitySet="Project_Instruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Projects_dbo_MusicalStyles_MusicalStyleId" Association="Self.FK_dbo_Projects_dbo_MusicalStyles_MusicalStyleId">
+            <End Role="MusicalStyles" EntitySet="MusicalStyles" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Projects_dbo_Users_UserId" Association="Self.FK_dbo_Projects_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_Badges_dbo_Badges_BadgeId" Association="Self.FK_dbo_User_Badges_dbo_Badges_BadgeId">
+            <End Role="Badges" EntitySet="Badges" />
+            <End Role="User_Badges" EntitySet="User_Badges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_Badges_dbo_Users_UserId" Association="Self.FK_dbo_User_Badges_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Badges" EntitySet="User_Badges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_Instruments_dbo_Instruments_InstrumentId" Association="Self.FK_dbo_User_Instruments_dbo_Instruments_InstrumentId">
+            <End Role="Instruments" EntitySet="Instruments" />
+            <End Role="User_Instruments" EntitySet="User_Instruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_Instruments_dbo_Users_UserId" Association="Self.FK_dbo_User_Instruments_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Instruments" EntitySet="User_Instruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_MusicalStyles_dbo_MusicalStyles_MusicalStyleId" Association="Self.FK_dbo_User_MusicalStyles_dbo_MusicalStyles_MusicalStyleId">
+            <End Role="MusicalStyles" EntitySet="MusicalStyles" />
+            <End Role="User_MusicalStyles" EntitySet="User_MusicalStyles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_MusicalStyles_dbo_Users_UserId" Association="Self.FK_dbo_User_MusicalStyles_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_MusicalStyles" EntitySet="User_MusicalStyles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Countries_CountryId" Association="Self.FK_dbo_Users_dbo_Countries_CountryId">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Genders_GenderId" Association="Self.FK_dbo_Users_dbo_Genders_GenderId">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+            <End Role="User" EntitySet="User" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MusicHubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Badges">
+          <Key>
+            <PropertyRef Name="BadgeId" />
+          </Key>
+          <Property Name="BadgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BadgeTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BadgeImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User_Badges" Relationship="Self.FK_dbo_User_Badges_dbo_Badges_BadgeId" FromRole="Badges" ToRole="User_Badges" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CountryCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_Countries_CountryId" FromRole="Countries" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Friendships">
+          <Key>
+            <PropertyRef Name="FriendshipId" />
+          </Key>
+          <Property Name="FriendshipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId_follower" Type="Int32" Nullable="false" />
+          <Property Name="UserId_following" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Friendships_dbo_Users_UserId_follower" FromRole="Friendships" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_dbo_Friendships_dbo_Users_UserId_following" FromRole="Friendships" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenderName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_Genders_GenderId" FromRole="Genders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Instruments">
+          <Key>
+            <PropertyRef Name="InstrumentId" />
+          </Key>
+          <Property Name="InstrumentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstrumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InstrumentType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project_Instruments" Relationship="Self.FK_dbo_Project_Instruments_dbo_Instruments_InstrumentId" FromRole="Instruments" ToRole="Project_Instruments" />
+          <NavigationProperty Name="User_Instruments" Relationship="Self.FK_dbo_User_Instruments_dbo_Instruments_InstrumentId" FromRole="Instruments" ToRole="User_Instruments" />
+        </EntityType>
+        <EntityType Name="MusicalStyles">
+          <Key>
+            <PropertyRef Name="MusicalStyleId" />
+          </Key>
+          <Property Name="MusicalStyleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MusicalStyleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_dbo_Projects_dbo_MusicalStyles_MusicalStyleId" FromRole="MusicalStyles" ToRole="Projects" />
+          <NavigationProperty Name="User_MusicalStyles" Relationship="Self.FK_dbo_User_MusicalStyles_dbo_MusicalStyles_MusicalStyleId" FromRole="MusicalStyles" ToRole="User_MusicalStyles" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NotificationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NotificationType" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Notifications_dbo_Users_UserId" FromRole="Notifications" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Project_Comments">
+          <Key>
+            <PropertyRef Name="Project_CommentId" />
+          </Key>
+          <Property Name="Project_CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CommentType" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_dbo_Project_Comments_dbo_Projects_ProjectId" FromRole="Project_Comments" ToRole="Projects" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Project_Comments_dbo_Users_UserId" FromRole="Project_Comments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Project_Contents">
+          <Key>
+            <PropertyRef Name="Project_ContentId" />
+          </Key>
+          <Property Name="Project_ContentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContentType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_dbo_Project_Contents_dbo_Projects_ProjectId" FromRole="Project_Contents" ToRole="Projects" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Project_Contents_dbo_Users_UserId" FromRole="Project_Contents" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Project_Followers">
+          <Key>
+            <PropertyRef Name="Project_FollowerId" />
+          </Key>
+          <Property Name="Project_FollowerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_dbo_Project_Followers_dbo_Projects_ProjectId" FromRole="Project_Followers" ToRole="Projects" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Project_Followers_dbo_Users_UserId" FromRole="Project_Followers" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Project_Instruments">
+          <Key>
+            <PropertyRef Name="Project_InstrumentId" />
+          </Key>
+          <Property Name="Project_InstrumentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="InstrumentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Instruments" Relationship="Self.FK_dbo_Project_Instruments_dbo_Instruments_InstrumentId" FromRole="Project_Instruments" ToRole="Instruments" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_dbo_Project_Instruments_dbo_Projects_ProjectId" FromRole="Project_Instruments" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProjectDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MusicalStyleId" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MusicalStyles" Relationship="Self.FK_dbo_Projects_dbo_MusicalStyles_MusicalStyleId" FromRole="Projects" ToRole="MusicalStyles" />
+          <NavigationProperty Name="Project_Comments" Relationship="Self.FK_dbo_Project_Comments_dbo_Projects_ProjectId" FromRole="Projects" ToRole="Project_Comments" />
+          <NavigationProperty Name="Project_Contents" Relationship="Self.FK_dbo_Project_Contents_dbo_Projects_ProjectId" FromRole="Projects" ToRole="Project_Contents" />
+          <NavigationProperty Name="Project_Followers" Relationship="Self.FK_dbo_Project_Followers_dbo_Projects_ProjectId" FromRole="Projects" ToRole="Project_Followers" />
+          <NavigationProperty Name="Project_Instruments" Relationship="Self.FK_dbo_Project_Instruments_dbo_Projects_ProjectId" FromRole="Projects" ToRole="Project_Instruments" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Projects_dbo_Users_UserId" FromRole="Projects" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="56" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="webpages_Roles" Relationship="Self.webpages_UsersInRoles" FromRole="User" ToRole="webpages_Roles" />
+        </EntityType>
+        <EntityType Name="User_Badges">
+          <Key>
+            <PropertyRef Name="User_BadgeId" />
+          </Key>
+          <Property Name="User_BadgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="BadgeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Badges" Relationship="Self.FK_dbo_User_Badges_dbo_Badges_BadgeId" FromRole="User_Badges" ToRole="Badges" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_User_Badges_dbo_Users_UserId" FromRole="User_Badges" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User_Instruments">
+          <Key>
+            <PropertyRef Name="User_InstrumentId" />
+          </Key>
+          <Property Name="User_InstrumentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="InstrumentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Instruments" Relationship="Self.FK_dbo_User_Instruments_dbo_Instruments_InstrumentId" FromRole="User_Instruments" ToRole="Instruments" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_User_Instruments_dbo_Users_UserId" FromRole="User_Instruments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User_MusicalStyles">
+          <Key>
+            <PropertyRef Name="User_MusicalStyleId" />
+          </Key>
+          <Property Name="User_MusicalStyleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="MusicalStyleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MusicalStyles" Relationship="Self.FK_dbo_User_MusicalStyles_dbo_MusicalStyles_MusicalStyleId" FromRole="User_MusicalStyles" ToRole="MusicalStyles" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_User_MusicalStyles_dbo_Users_UserId" FromRole="User_MusicalStyles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AboutMe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GenderId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK_dbo_Users_dbo_Countries_CountryId" FromRole="Users" ToRole="Countries" />
+          <NavigationProperty Name="Friendships" Relationship="Self.FK_dbo_Friendships_dbo_Users_UserId_follower" FromRole="Users" ToRole="Friendships" />
+          <NavigationProperty Name="Friendships1" Relationship="Self.FK_dbo_Friendships_dbo_Users_UserId_following" FromRole="Users" ToRole="Friendships" />
+          <NavigationProperty Name="Genders" Relationship="Self.FK_dbo_Users_dbo_Genders_GenderId" FromRole="Users" ToRole="Genders" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_dbo_Notifications_dbo_Users_UserId" FromRole="Users" ToRole="Notifications" />
+          <NavigationProperty Name="Project_Comments" Relationship="Self.FK_dbo_Project_Comments_dbo_Users_UserId" FromRole="Users" ToRole="Project_Comments" />
+          <NavigationProperty Name="Project_Contents" Relationship="Self.FK_dbo_Project_Contents_dbo_Users_UserId" FromRole="Users" ToRole="Project_Contents" />
+          <NavigationProperty Name="Project_Followers" Relationship="Self.FK_dbo_Project_Followers_dbo_Users_UserId" FromRole="Users" ToRole="Project_Followers" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_dbo_Projects_dbo_Users_UserId" FromRole="Users" ToRole="Projects" />
+          <NavigationProperty Name="User_Badges" Relationship="Self.FK_dbo_User_Badges_dbo_Users_UserId" FromRole="Users" ToRole="User_Badges" />
+          <NavigationProperty Name="User_Instruments" Relationship="Self.FK_dbo_User_Instruments_dbo_Users_UserId" FromRole="Users" ToRole="User_Instruments" />
+          <NavigationProperty Name="User_MusicalStyles" Relationship="Self.FK_dbo_User_MusicalStyles_dbo_Users_UserId" FromRole="Users" ToRole="User_MusicalStyles" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_dbo_User_Badges_dbo_Badges_BadgeId">
+          <End Role="Badges" Type="Self.Badges" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Badges" Type="Self.User_Badges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Badges">
+              <PropertyRef Name="BadgeId" />
+            </Principal>
+            <Dependent Role="User_Badges">
+              <PropertyRef Name="BadgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Countries_CountryId">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Friendships_dbo_Users_UserId_follower">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Friendships" Type="Self.Friendships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Friendships">
+              <PropertyRef Name="UserId_follower" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Friendships_dbo_Users_UserId_following">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Friendships" Type="Self.Friendships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Friendships">
+              <PropertyRef Name="UserId_following" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Genders_GenderId">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Instruments_dbo_Instruments_InstrumentId">
+          <End Role="Instruments" Type="Self.Instruments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Instruments" Type="Self.Project_Instruments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instruments">
+              <PropertyRef Name="InstrumentId" />
+            </Principal>
+            <Dependent Role="Project_Instruments">
+              <PropertyRef Name="InstrumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_Instruments_dbo_Instruments_InstrumentId">
+          <End Role="Instruments" Type="Self.Instruments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Instruments" Type="Self.User_Instruments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instruments">
+              <PropertyRef Name="InstrumentId" />
+            </Principal>
+            <Dependent Role="User_Instruments">
+              <PropertyRef Name="InstrumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Projects_dbo_MusicalStyles_MusicalStyleId">
+          <End Role="MusicalStyles" Type="Self.MusicalStyles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MusicalStyles">
+              <PropertyRef Name="MusicalStyleId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="MusicalStyleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_MusicalStyles_dbo_MusicalStyles_MusicalStyleId">
+          <End Role="MusicalStyles" Type="Self.MusicalStyles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_MusicalStyles" Type="Self.User_MusicalStyles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MusicalStyles">
+              <PropertyRef Name="MusicalStyleId" />
+            </Principal>
+            <Dependent Role="User_MusicalStyles">
+              <PropertyRef Name="MusicalStyleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Notifications_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Comments_dbo_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Comments" Type="Self.Project_Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Project_Comments">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Comments_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Comments" Type="Self.Project_Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Project_Comments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Contents_dbo_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Contents" Type="Self.Project_Contents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Project_Contents">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Contents_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Contents" Type="Self.Project_Contents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Project_Contents">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Followers_dbo_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Followers" Type="Self.Project_Followers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Project_Followers">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Followers_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Followers" Type="Self.Project_Followers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Project_Followers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Project_Instruments_dbo_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Instruments" Type="Self.Project_Instruments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Project_Instruments">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Projects_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_Badges_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Badges" Type="Self.User_Badges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User_Badges">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_Instruments_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Instruments" Type="Self.User_Instruments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User_Instruments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_User_MusicalStyles_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_MusicalStyles" Type="Self.User_MusicalStyles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User_MusicalStyles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="dbContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Badges" EntityType="Self.Badges" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" />
+          <EntitySet Name="Friendships" EntityType="Self.Friendships" />
+          <EntitySet Name="Genders" EntityType="Self.Genders" />
+          <EntitySet Name="Instruments" EntityType="Self.Instruments" />
+          <EntitySet Name="MusicalStyles" EntityType="Self.MusicalStyles" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" />
+          <EntitySet Name="Project_Comments" EntityType="Self.Project_Comments" />
+          <EntitySet Name="Project_Contents" EntityType="Self.Project_Contents" />
+          <EntitySet Name="Project_Followers" EntityType="Self.Project_Followers" />
+          <EntitySet Name="Project_Instruments" EntityType="Self.Project_Instruments" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="User_Badges" EntityType="Self.User_Badges" />
+          <EntitySet Name="User_Instruments" EntityType="Self.User_Instruments" />
+          <EntitySet Name="User_MusicalStyles" EntityType="Self.User_MusicalStyles" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
+          <AssociationSet Name="FK_dbo_User_Badges_dbo_Badges_BadgeId" Association="Self.FK_dbo_User_Badges_dbo_Badges_BadgeId">
+            <End Role="Badges" EntitySet="Badges" />
+            <End Role="User_Badges" EntitySet="User_Badges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Countries_CountryId" Association="Self.FK_dbo_Users_dbo_Countries_CountryId">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Friendships_dbo_Users_UserId_follower" Association="Self.FK_dbo_Friendships_dbo_Users_UserId_follower">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Friendships" EntitySet="Friendships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Friendships_dbo_Users_UserId_following" Association="Self.FK_dbo_Friendships_dbo_Users_UserId_following">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Friendships" EntitySet="Friendships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Genders_GenderId" Association="Self.FK_dbo_Users_dbo_Genders_GenderId">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Instruments_dbo_Instruments_InstrumentId" Association="Self.FK_dbo_Project_Instruments_dbo_Instruments_InstrumentId">
+            <End Role="Instruments" EntitySet="Instruments" />
+            <End Role="Project_Instruments" EntitySet="Project_Instruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_Instruments_dbo_Instruments_InstrumentId" Association="Self.FK_dbo_User_Instruments_dbo_Instruments_InstrumentId">
+            <End Role="Instruments" EntitySet="Instruments" />
+            <End Role="User_Instruments" EntitySet="User_Instruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Projects_dbo_MusicalStyles_MusicalStyleId" Association="Self.FK_dbo_Projects_dbo_MusicalStyles_MusicalStyleId">
+            <End Role="MusicalStyles" EntitySet="MusicalStyles" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_MusicalStyles_dbo_MusicalStyles_MusicalStyleId" Association="Self.FK_dbo_User_MusicalStyles_dbo_MusicalStyles_MusicalStyleId">
+            <End Role="MusicalStyles" EntitySet="MusicalStyles" />
+            <End Role="User_MusicalStyles" EntitySet="User_MusicalStyles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Notifications_dbo_Users_UserId" Association="Self.FK_dbo_Notifications_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Comments_dbo_Projects_ProjectId" Association="Self.FK_dbo_Project_Comments_dbo_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Project_Comments" EntitySet="Project_Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Comments_dbo_Users_UserId" Association="Self.FK_dbo_Project_Comments_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Project_Comments" EntitySet="Project_Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Contents_dbo_Projects_ProjectId" Association="Self.FK_dbo_Project_Contents_dbo_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Project_Contents" EntitySet="Project_Contents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Contents_dbo_Users_UserId" Association="Self.FK_dbo_Project_Contents_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Project_Contents" EntitySet="Project_Contents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Followers_dbo_Projects_ProjectId" Association="Self.FK_dbo_Project_Followers_dbo_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Project_Followers" EntitySet="Project_Followers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Followers_dbo_Users_UserId" Association="Self.FK_dbo_Project_Followers_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Project_Followers" EntitySet="Project_Followers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Project_Instruments_dbo_Projects_ProjectId" Association="Self.FK_dbo_Project_Instruments_dbo_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Project_Instruments" EntitySet="Project_Instruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Projects_dbo_Users_UserId" Association="Self.FK_dbo_Projects_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_Badges_dbo_Users_UserId" Association="Self.FK_dbo_User_Badges_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Badges" EntitySet="User_Badges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_Instruments_dbo_Users_UserId" Association="Self.FK_dbo_User_Instruments_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Instruments" EntitySet="User_Instruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_User_MusicalStyles_dbo_Users_UserId" Association="Self.FK_dbo_User_MusicalStyles_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_MusicalStyles" EntitySet="User_MusicalStyles" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="Self.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MusicHubModelStoreContainer" CdmEntityContainer="dbContainer">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="MusicHubModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Badges">
+            <EntityTypeMapping TypeName="MusicHubModel.Badges">
+              <MappingFragment StoreEntitySet="Badges">
+                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
+                <ScalarProperty Name="BadgeTitle" ColumnName="BadgeTitle" />
+                <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
+                <ScalarProperty Name="BadgeImageUrl" ColumnName="BadgeImageUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="MusicHubModel.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friendships">
+            <EntityTypeMapping TypeName="MusicHubModel.Friendships">
+              <MappingFragment StoreEntitySet="Friendships">
+                <ScalarProperty Name="FriendshipId" ColumnName="FriendshipId" />
+                <ScalarProperty Name="UserId_follower" ColumnName="UserId_follower" />
+                <ScalarProperty Name="UserId_following" ColumnName="UserId_following" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="MusicHubModel.Genders">
+              <MappingFragment StoreEntitySet="Genders">
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="GenderName" ColumnName="GenderName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instruments">
+            <EntityTypeMapping TypeName="MusicHubModel.Instruments">
+              <MappingFragment StoreEntitySet="Instruments">
+                <ScalarProperty Name="InstrumentId" ColumnName="InstrumentId" />
+                <ScalarProperty Name="InstrumentName" ColumnName="InstrumentName" />
+                <ScalarProperty Name="InstrumentType" ColumnName="InstrumentType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MusicalStyles">
+            <EntityTypeMapping TypeName="MusicHubModel.MusicalStyles">
+              <MappingFragment StoreEntitySet="MusicalStyles">
+                <ScalarProperty Name="MusicalStyleId" ColumnName="MusicalStyleId" />
+                <ScalarProperty Name="MusicalStyleName" ColumnName="MusicalStyleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="MusicHubModel.Notifications">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="NotificationName" ColumnName="NotificationName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NotificationDescription" ColumnName="NotificationDescription" />
+                <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_Comments">
+            <EntityTypeMapping TypeName="MusicHubModel.Project_Comments">
+              <MappingFragment StoreEntitySet="Project_Comments">
+                <ScalarProperty Name="Project_CommentId" ColumnName="Project_CommentId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CommentType" ColumnName="CommentType" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_Contents">
+            <EntityTypeMapping TypeName="MusicHubModel.Project_Contents">
+              <MappingFragment StoreEntitySet="Project_Contents">
+                <ScalarProperty Name="Project_ContentId" ColumnName="Project_ContentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_Followers">
+            <EntityTypeMapping TypeName="MusicHubModel.Project_Followers">
+              <MappingFragment StoreEntitySet="Project_Followers">
+                <ScalarProperty Name="Project_FollowerId" ColumnName="Project_FollowerId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_Instruments">
+            <EntityTypeMapping TypeName="MusicHubModel.Project_Instruments">
+              <MappingFragment StoreEntitySet="Project_Instruments">
+                <ScalarProperty Name="Project_InstrumentId" ColumnName="Project_InstrumentId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="InstrumentId" ColumnName="InstrumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="MusicHubModel.Projects">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="MusicalStyleId" ColumnName="MusicalStyleId" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="MusicHubModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Badges">
+            <EntityTypeMapping TypeName="MusicHubModel.User_Badges">
+              <MappingFragment StoreEntitySet="User_Badges">
+                <ScalarProperty Name="User_BadgeId" ColumnName="User_BadgeId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Instruments">
+            <EntityTypeMapping TypeName="MusicHubModel.User_Instruments">
+              <MappingFragment StoreEntitySet="User_Instruments">
+                <ScalarProperty Name="User_InstrumentId" ColumnName="User_InstrumentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="InstrumentId" ColumnName="InstrumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_MusicalStyles">
+            <EntityTypeMapping TypeName="MusicHubModel.User_MusicalStyles">
+              <MappingFragment StoreEntitySet="User_MusicalStyles">
+                <ScalarProperty Name="User_MusicalStyleId" ColumnName="User_MusicalStyleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MusicalStyleId" ColumnName="MusicalStyleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MusicHubModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AboutMe" ColumnName="AboutMe" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="MusicHubModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="MusicHubModel.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="MusicHubModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="MusicHubModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

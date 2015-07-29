@@ -840,8 +840,8 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 }(window.jQuery);
 
 /* ========================================================================
- * Bootstrap: modal.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#modals
+ * Bootstrap: moMusicHub.Data.Reps.js v3.0.0
+ * http://twbs.github.com/bootstrap/javascript.html#moMusicHub.Data.Repss
  * ========================================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -861,10 +861,10 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 +function ($) { "use strict";
 
-  // MODAL CLASS DEFINITION
+  // MOMusicHub.Data.Reps CLASS DEFINITION
   // ======================
 
-  var Modal = function (element, options) {
+  var MoMusicHub.Data.Reps = function (element, options) {
     this.options   = options
     this.$element  = $(element)
     this.$backdrop =
@@ -873,19 +873,19 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     if (this.options.remote) this.$element.load(this.options.remote)
   }
 
-  Modal.DEFAULTS = {
+  MoMusicHub.Data.Reps.DEFAULTS = {
       backdrop: true
     , keyboard: true
     , show: true
   }
 
-  Modal.prototype.toggle = function (_relatedTarget) {
+  MoMusicHub.Data.Reps.prototype.toggle = function (_relatedTarget) {
     return this[!this.isShown ? 'show' : 'hide'](_relatedTarget)
   }
 
-  Modal.prototype.show = function (_relatedTarget) {
+  MoMusicHub.Data.Reps.prototype.show = function (_relatedTarget) {
     var that = this
-    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
+    var e    = $.Event('show.bs.moMusicHub.Data.Reps', { relatedTarget: _relatedTarget })
 
     this.$element.trigger(e)
 
@@ -895,13 +895,13 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     this.escape()
 
-    this.$element.on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+    this.$element.on('click.dismiss.moMusicHub.Data.Reps', '[data-dismiss="moMusicHub.Data.Reps"]', $.proxy(this.hide, this))
 
     this.backdrop(function () {
       var transition = $.support.transition && that.$element.hasClass('fade')
 
       if (!that.$element.parent().length) {
-        that.$element.appendTo(document.body) // don't move modals dom position
+        that.$element.appendTo(document.body) // don't move moMusicHub.Data.Repss dom position
       }
 
       that.$element.show()
@@ -916,10 +916,10 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
       that.enforceFocus()
 
-      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
+      var e = $.Event('shown.bs.moMusicHub.Data.Reps', { relatedTarget: _relatedTarget })
 
       transition ?
-        that.$element.find('.modal-dialog') // wait for modal to slide in
+        that.$element.find('.moMusicHub.Data.Reps-dialog') // wait for moMusicHub.Data.Reps to slide in
           .one($.support.transition.end, function () {
             that.$element.focus().trigger(e)
           })
@@ -928,10 +928,10 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     })
   }
 
-  Modal.prototype.hide = function (e) {
+  MoMusicHub.Data.Reps.prototype.hide = function (e) {
     if (e) e.preventDefault()
 
-    e = $.Event('hide.bs.modal')
+    e = $.Event('hide.bs.moMusicHub.Data.Reps')
 
     this.$element.trigger(e)
 
@@ -941,65 +941,65 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     this.escape()
 
-    $(document).off('focusin.bs.modal')
+    $(document).off('focusin.bs.moMusicHub.Data.Reps')
 
     this.$element
       .removeClass('in')
       .attr('aria-hidden', true)
-      .off('click.dismiss.modal')
+      .off('click.dismiss.moMusicHub.Data.Reps')
 
     $.support.transition && this.$element.hasClass('fade') ?
       this.$element
-        .one($.support.transition.end, $.proxy(this.hideModal, this))
+        .one($.support.transition.end, $.proxy(this.hideMoMusicHub.Data.Reps, this))
         .emulateTransitionEnd(300) :
-      this.hideModal()
+      this.hideMoMusicHub.Data.Reps()
   }
 
-  Modal.prototype.enforceFocus = function () {
+  MoMusicHub.Data.Reps.prototype.enforceFocus = function () {
     $(document)
-      .off('focusin.bs.modal') // guard against infinite focus loop
-      .on('focusin.bs.modal', $.proxy(function (e) {
+      .off('focusin.bs.moMusicHub.Data.Reps') // guard against infinite focus loop
+      .on('focusin.bs.moMusicHub.Data.Reps', $.proxy(function (e) {
         if (this.$element[0] !== e.target && !this.$element.has(e.target).length) {
           this.$element.focus()
         }
       }, this))
   }
 
-  Modal.prototype.escape = function () {
+  MoMusicHub.Data.Reps.prototype.escape = function () {
     if (this.isShown && this.options.keyboard) {
-      this.$element.on('keyup.dismiss.bs.modal', $.proxy(function (e) {
+      this.$element.on('keyup.dismiss.bs.moMusicHub.Data.Reps', $.proxy(function (e) {
         e.which == 27 && this.hide()
       }, this))
     } else if (!this.isShown) {
-      this.$element.off('keyup.dismiss.bs.modal')
+      this.$element.off('keyup.dismiss.bs.moMusicHub.Data.Reps')
     }
   }
 
-  Modal.prototype.hideModal = function () {
+  MoMusicHub.Data.Reps.prototype.hideMoMusicHub.Data.Reps = function () {
     var that = this
     this.$element.hide()
     this.backdrop(function () {
       that.removeBackdrop()
-      that.$element.trigger('hidden.bs.modal')
+      that.$element.trigger('hidden.bs.moMusicHub.Data.Reps')
     })
   }
 
-  Modal.prototype.removeBackdrop = function () {
+  MoMusicHub.Data.Reps.prototype.removeBackdrop = function () {
     this.$backdrop && this.$backdrop.remove()
     this.$backdrop = null
   }
 
-  Modal.prototype.backdrop = function (callback) {
+  MoMusicHub.Data.Reps.prototype.backdrop = function (callback) {
     var that    = this
     var animate = this.$element.hasClass('fade') ? 'fade' : ''
 
     if (this.isShown && this.options.backdrop) {
       var doAnimate = $.support.transition && animate
 
-      this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
+      this.$backdrop = $('<div class="moMusicHub.Data.Reps-backdrop ' + animate + '" />')
         .appendTo(document.body)
 
-      this.$element.on('click.dismiss.modal', $.proxy(function (e) {
+      this.$element.on('click.dismiss.moMusicHub.Data.Reps', $.proxy(function (e) {
         if (e.target !== e.currentTarget) return
         this.options.backdrop == 'static'
           ? this.$element[0].focus.call(this.$element[0])
@@ -1033,56 +1033,56 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   }
 
 
-  // MODAL PLUGIN DEFINITION
+  // MOMusicHub.Data.Reps PLUGIN DEFINITION
   // =======================
 
-  var old = $.fn.modal
+  var old = $.fn.moMusicHub.Data.Reps
 
-  $.fn.modal = function (option, _relatedTarget) {
+  $.fn.moMusicHub.Data.Reps = function (option, _relatedTarget) {
     return this.each(function () {
       var $this   = $(this)
-      var data    = $this.data('bs.modal')
-      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
+      var data    = $this.data('bs.moMusicHub.Data.Reps')
+      var options = $.extend({}, MoMusicHub.Data.Reps.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-      if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
+      if (!data) $this.data('bs.moMusicHub.Data.Reps', (data = new MoMusicHub.Data.Reps(this, options)))
       if (typeof option == 'string') data[option](_relatedTarget)
       else if (options.show) data.show(_relatedTarget)
     })
   }
 
-  $.fn.modal.Constructor = Modal
+  $.fn.moMusicHub.Data.Reps.Constructor = MoMusicHub.Data.Reps
 
 
-  // MODAL NO CONFLICT
+  // MOMusicHub.Data.Reps NO CONFLICT
   // =================
 
-  $.fn.modal.noConflict = function () {
-    $.fn.modal = old
+  $.fn.moMusicHub.Data.Reps.noConflict = function () {
+    $.fn.moMusicHub.Data.Reps = old
     return this
   }
 
 
-  // MODAL DATA-API
+  // MOMusicHub.Data.Reps DATA-API
   // ==============
 
-  $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
+  $(document).on('click.bs.moMusicHub.Data.Reps.data-api', '[data-toggle="moMusicHub.Data.Reps"]', function (e) {
     var $this   = $(this)
     var href    = $this.attr('href')
     var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) //strip for ie7
-    var option  = $target.data('modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
+    var option  = $target.data('moMusicHub.Data.Reps') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
 
     e.preventDefault()
 
     $target
-      .modal(option, this)
+      .moMusicHub.Data.Reps(option, this)
       .one('hide', function () {
         $this.is(':visible') && $this.focus()
       })
   })
 
   $(document)
-    .on('show.bs.modal',  '.modal', function () { $(document.body).addClass('modal-open') })
-    .on('hidden.bs.modal', '.modal', function () { $(document.body).removeClass('modal-open') })
+    .on('show.bs.moMusicHub.Data.Reps',  '.moMusicHub.Data.Reps', function () { $(document.body).addClass('moMusicHub.Data.Reps-open') })
+    .on('hidden.bs.moMusicHub.Data.Reps', '.moMusicHub.Data.Reps', function () { $(document.body).removeClass('moMusicHub.Data.Reps-open') })
 
 }(window.jQuery);
 

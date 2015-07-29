@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -8,7 +9,11 @@ namespace MusicHub.Models
 {
     public class MusicHubDB : DbContext
     {
-
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            base.OnModelCreating(modelBuilder);
+        }
         public MusicHubDB() : base("AzureCon") { }
 
         public DbSet<User> Users { get; set; }
