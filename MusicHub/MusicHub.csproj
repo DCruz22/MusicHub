@@ -262,6 +262,7 @@
     <Compile Include="Data\Reps\User_MusicalStylesRepository.cs">
       <DependentUpon>RepositoryTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\StrategyAlgorithms\SearchProjectsAlgorithm.cs" />
     <Compile Include="db.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -289,12 +290,14 @@
     <Compile Include="Models\Project_Content.cs" />
     <Compile Include="Models\Project_Follower.cs" />
     <Compile Include="Models\Project_Instrument.cs" />
+    <Compile Include="Models\SeguridadAuthorize.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\User_Badge.cs" />
     <Compile Include="Models\User_Instrument.cs" />
     <Compile Include="Models\User_MusicalStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -306,7 +309,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Results.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Shared\_Register_Layout.cshtml" />
+    <Content Include="Views\Shared\_Result_Layout.cshtml" />
     <Content Include="Views\Shared\_Logged_Layout.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <None Include="Web.Debug.config">
