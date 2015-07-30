@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using MusicHub.Models;
+using MusicHub.Helpers;
 using MusicHub.ViewModels;
 using MusicHub.Data.Reps.Reps;
 using MusicHub.Data.StrategyAlgorithms;
@@ -148,9 +149,16 @@ namespace MusicHub.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> ChangeProfilePicture(HttpPostedFile file)
+        public async Task<ActionResult> ChangeProfilePicture(HttpPostedFile file, string photoTempUrl)
         {
-            User user = (await _usrrep.FindAsync(x => x.UserName == WebSecurity.CurrentUserName));
+
+            if (!string.IsNullOrEmpty(photoTempUrl))
+            {
+                string filePath = FilesHelper.movePostFile(photoTempUrl, FilesHelper.Photo_types.PROFILE_PICTURE);
+                User user = (await _usrrep.FindAsync(x => x.UserName == WebSecurity.CurrentUserName));
+                user.PhotoUrl = filePath;
+                await _usrrep.UpdateAsync(user);
+            }
             return View();
         }
 

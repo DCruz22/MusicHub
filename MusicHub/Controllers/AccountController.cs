@@ -15,9 +15,9 @@ namespace MusicHub.Controllers
     {
         // GET: Account
 
-        private UserRepository _usr = new UserRepository();
-        private CountriesRepository _country = new CountriesRepository();
-        private GendersRepository _gender = new GendersRepository();
+        private UserRepository _usrep = new UserRepository();
+        private CountriesRepository _countryrep = new CountriesRepository();
+        private GendersRepository _genderep = new GendersRepository();
 
         [SeguridadAuthorize()]
         public ActionResult Login()
@@ -42,9 +42,9 @@ namespace MusicHub.Controllers
         [SeguridadAuthorize()]
         public ActionResult Register()
         {
-            ViewBag.GenderId = new SelectList(_gender.All(), "GenderId", "GenderName");
+            ViewBag.GenderId = new SelectList(_genderep.All(), "GenderId", "GenderName");
 
-            ViewBag.CountryId = new SelectList(_country.All(), "CountryId", "CountryName");
+            ViewBag.CountryId = new SelectList(_countryrep.All(), "CountryId", "CountryName");
             return View();
         }
 
@@ -53,15 +53,15 @@ namespace MusicHub.Controllers
         [ValidateAntiForgeryToken()]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            User username = await _usr.FindAsync(x => x.UserName == model.UserName);
-            User usermail = await _usr.FindAsync(x => x.Email == model.Email);
+            User username = await _usrep.FindAsync(x => x.UserName == model.UserName);
+            User usermail = await _usrep.FindAsync(x => x.Email == model.Email);
 
             if(username != null || usermail != null)
             {
                 string error = username != null ? "Username is already in use." : "Email is already in use.";
 
-                ViewBag.GenderId = new SelectList(_gender.All(), "GenderId", "GenderName");
-                ViewBag.CountryId = new SelectList(_country.All(), "CountryId", "CountryName");
+                ViewBag.GenderId = new SelectList(_genderep.All(), "GenderId", "GenderName");
+                ViewBag.CountryId = new SelectList(_countryrep.All(), "CountryId", "CountryName");
 
                 ModelState.AddModelError("", error);
                 return View(model);
@@ -88,11 +88,41 @@ namespace MusicHub.Controllers
                 return RedirectToAction("Profile", "User", new { user = model.UserName});
             }
 
-            ViewBag.GenderId = new SelectList(_gender.All(), "GenderId", "GenderName");
+            ViewBag.GenderId = new SelectList(_genderep.All(), "GenderId", "GenderName");
 
-            ViewBag.CountryId = new SelectList(_country.All(), "CountryId", "CountryName");
+            ViewBag.CountryId = new SelectList(_countryrep.All(), "CountryId", "CountryName");
             return View(model);
         }
+
+        [Authorize]
+        public ActionResult PasswordReset(string Token)
+        {
+            if (!WebSecurity.IsAuthenticated || string.IsNullOrEmpty(Token))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> PasswordReset(PasswordReset PasswordReset, string Token)
+        {
+            if (ModelState.IsValid)
+            {
+                int userId = WebSecurity.GetUserIdFromPasswordResetToken(Token);
+                User user = await _usrep.FindAsync(a => a.UserId == userId);
+
+                WebSecurity.ResetPassword(Token, PasswordReset.ConfirmPassword);
+                WebSecurity.Login(user.UserName, PasswordReset.ConfirmPassword, persistCookie: false);
+
+                return RedirectToAction("Index", "User", new { user = WebSecurity.CurrentUserName});
+            }
+
+            return View();
+        }
+ 
 
         public ActionResult LogOff()
         {

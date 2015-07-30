@@ -10,7 +10,7 @@ namespace MusicHub.Helpers
     public class FilesHelper
     {
         private const string CMS_TEMP_PATH = "public\\temp";
-        private const string CMS_FINAL_PATH_POST = "public\\post_images";
+        private const string CMS_FINAL_PATH_CONTENT = "public\\content_images";
         private const string CMS_FINAL_PATH_PROFILE = "public\\profile_pictures";
 
         public static string SaveFiles(HttpFileCollectionBase files, string tipo)
@@ -71,7 +71,7 @@ namespace MusicHub.Helpers
         public static string movePostFile(string fileName, Photo_types photoType)
         {
 
-            string finalPath = (photoType == Photo_types.POST_PICTURE ? CMS_FINAL_PATH_POST : CMS_FINAL_PATH_PROFILE);
+            string finalPath = (photoType == Photo_types.CONTENT_PICTURE ? CMS_FINAL_PATH_CONTENT : CMS_FINAL_PATH_PROFILE);
 
             string sourceFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + CMS_TEMP_PATH, fileName);
             string destinationFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + finalPath, fileName);
@@ -98,7 +98,7 @@ namespace MusicHub.Helpers
         public enum Photo_types
         {
 
-            POST_PICTURE,
+            CONTENT_PICTURE,
             PROFILE_PICTURE
         }
 
