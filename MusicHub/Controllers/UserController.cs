@@ -148,8 +148,9 @@ namespace MusicHub.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> ChangeProfilePicture()
+        public async Task<ActionResult> ChangeProfilePicture(HttpPostedFile file)
         {
+            User user = (await _usrrep.FindAsync(x => x.UserName == WebSecurity.CurrentUserName));
             return View();
         }
 
