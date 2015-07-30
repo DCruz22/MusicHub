@@ -8,7 +8,7 @@ namespace MusicHub.ViewModels
 {
     public class ProjectViewModel
     {
-        public User user { get; set; }
-        public Project project { get; set; }
+        public User User { get; set; }
+        public Project Project { get; set; }
     }
 }

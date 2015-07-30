@@ -6,9 +6,9 @@ using MusicHub.Models;
 
 namespace MusicHub.ViewModels
 {
-    public class ProjectContentViewModel
+    public class PreferencesViewModel
     {
-        public Project Project { get; set; }
-        public IEnumerable<Project_Content> Contents { get; set; }
+        public List<MusicalStyle> Styles { get; set; }
+        public List<Instrument> Instruments { get; set; }
     }
 }

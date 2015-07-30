@@ -297,6 +297,7 @@
     <Compile Include="Models\User_MusicalStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\PreferencesViewModel.cs" />
     <Compile Include="ViewModels\ProjectContentViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\Project_CommentViewModel.cs" />
@@ -319,6 +320,7 @@
     <Content Include="Views\Project\Comment.cshtml" />
     <Content Include="Views\User\Suggestions.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\MyProjects.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -328,6 +330,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201507110621120_first.resx">

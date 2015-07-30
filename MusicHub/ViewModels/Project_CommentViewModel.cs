@@ -8,7 +8,7 @@ namespace MusicHub.ViewModels
 {
     public class Project_CommentViewModel
     {
-        public Project_Comment  comment { get; set; }
-        public User user { get; set; }
+        public Project_Comment  Comment { get; set; }
+        public User User { get; set; }
     }
 }

@@ -35,12 +35,12 @@ namespace MusicHub.Data.StrategyAlgorithms
 
                 projvm.Add(new ProjectViewModel()
                 {
-                    project = proj,
-                    user = usr
+                    Project = proj,
+                    User = usr
                 });
             }
 
-            projvm = projvm.OrderByDescending(x => x.project.CreationDate).ToList();
+            projvm = projvm.OrderByDescending(x => x.Project.CreationDate).ToList();
 
             return projvm;
         }
@@ -59,12 +59,12 @@ namespace MusicHub.Data.StrategyAlgorithms
 
                 projvm.Add(new ProjectViewModel()
                 {
-                    project = proj,
-                    user = usr
+                    Project = proj,
+                    User = usr
                 });
             }
 
-            projvm = projvm.OrderByDescending(x => x.project.CreationDate).ToList();
+            projvm = projvm.OrderByDescending(x => x.Project.CreationDate).ToList();
 
             return projvm;
         }
