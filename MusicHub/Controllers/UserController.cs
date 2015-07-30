@@ -25,7 +25,7 @@ namespace MusicHub.Controllers
         public async Task<ActionResult> User_Profile(string user)
         {
             User usr = await _usrrep.FindAsync(x => x.UserName == user);
-            return View(user);
+            return View(usr);
         }
 
         [Authorize]

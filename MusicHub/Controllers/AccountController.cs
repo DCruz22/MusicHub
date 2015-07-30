@@ -32,7 +32,7 @@ namespace MusicHub.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password))
             {
-                return RedirectToAction("Profile", "User");
+                return RedirectToAction("Profile", "User", new { user = model.UserName});
             }
 
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
@@ -85,7 +85,7 @@ namespace MusicHub.Controllers
 
                 WebSecurity.CreateUserAndAccount(model.UserName, model.Password, user);
                 WebSecurity.Login(model.UserName, model.Password);
-                return RedirectToAction("Profile", "User");
+                return RedirectToAction("Profile", "User", new { user = model.UserName});
             }
 
             ViewBag.GenderId = new SelectList(_gender.All(), "GenderId", "GenderName");

@@ -317,6 +317,8 @@
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\Comment.cshtml" />
+    <Content Include="Views\User\Suggestions.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

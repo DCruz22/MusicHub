@@ -15,13 +15,14 @@
         <div class="nav-wrapper container">
             @Html.ActionLink("MusicHub", "Index", "Home", new { area = "" }, new { @class = "brand-logo" })
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class="col s6">
+                <li>
                     @using (Html.BeginForm("Results", "Home", FormMethod.Get))
                     {
                         <input type="text" name="search" class="white black-text" placeholder="search..."/>
                     }
                 </li>
-                <li>Welcome: @WebSecurity.CurrentUserName</li>
+                <li>@Html.ActionLink("Suggestions", "Suggestions", new { controller = "User"}, new { user = WebSecurity.CurrentUserName})</li>
+                <li>@Html.ActionLink("My Profile", "Profile", new { controller = "User"} , new { user = WebSecurity.CurrentUserName})</li>
                 <li>@Html.ActionLink("Log out","Logoff", "Account")</li>
             </ul>
         </div>

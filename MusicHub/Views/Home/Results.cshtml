@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MusicHub.ViewModels.ProjectViewModel>
 
 @{
-    Layout = "~/Views/Shared/_Register_Layout.cshtml";
+    Layout = "~/Views/Shared/_Result_Layout.cshtml";
 }
 
 <h2>Results</h2>
@@ -22,6 +22,10 @@
                     <p>@p.project.MusicalStyle</p>
                 </div>
             }
+        }
+        else
+        {
+            <span>No results were found.</span>
         }
     </div>
 </div>

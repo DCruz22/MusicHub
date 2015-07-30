@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using WebMatrix.WebData;
 
 namespace MusicHub
 {
@@ -14,16 +15,23 @@ namespace MusicHub
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Logged",
+                url: "{user}",
+                defaults: new { controller = "User", action = "Profile" }
+            );
+
+            routes.MapRoute(
+                name: "Suggestions",
+                url: "Suggestions/{user}",
+                defaults: new { controller = "User", action = "Suggestions" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name: "Logged",
-                url: "{controller}/{action}/{user}",
-                defaults: new { controller = "User", action = "Notebook", user = UrlParameter.Optional }
-            );
         }
     }
 }
