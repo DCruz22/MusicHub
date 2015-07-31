@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebMatrix.WebData;
 using System.Web.Mvc;
 using MusicHub.Models;
 using MusicHub.ViewModels;
@@ -36,6 +37,15 @@ namespace MusicHub.Controllers
                 return View(project);
             }
 
+            var user = (await _usrrep.FilterAsync(x => x.UserName == WebSecurity.CurrentUserName)).ToList().FirstOrDefault();
+
+            if (user != null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            project.User = user;
+
             if(ModelState.IsValid)
             {
                 _projrep.Create(project);
@@ -52,7 +62,7 @@ namespace MusicHub.Controllers
             return View(proj);
         }
 
-        public async Task<ActionResult> Comment(string projectname)
+        public async Task<ActionResult> Comments(string projectname)
         {
             List<Project_Comment> comments = (await _procomrep.FilterAsync(x => x.Project.ProjectName == projectname))
                                                 .OrderByDescending(x => x.Date)
@@ -63,7 +73,29 @@ namespace MusicHub.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> Comment(Project_Comment coment)
+        public async Task<ActionResult> Comment(Project_Comment comment)
+        {
+            User user = (await _usrrep.FindAsync(x => x.UserName == WebSecurity.CurrentUserName));
+            comment.User = user;
+
+            if(ModelState.IsValid)
+            {
+                await _procomrep.CreateAsync(comment);
+
+                return View();
+            }
+            return View(comment);
+        }
+
+        public async Task<ActionResult> Contents(string projectname) 
+        {
+            IEnumerable<Project_Content> contents = (await _procontrep.FilterAsync(x => x.Project.ProjectName == projectname)).ToList();
+            return View(contents);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> Content(Project_Content content, HttpPostedFile file)
         {
             return View();
         }

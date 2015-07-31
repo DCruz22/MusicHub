@@ -15,11 +15,11 @@
             foreach (var p in Model)
             {
                 <div class="section">
-                    @Html.ActionLink(p.user.UserName, "Profile", "User", new { user = p.user.UserName }) / @Html.ActionLink(p.project.ProjectName, "Detail", "Project", new { project = p.project.ProjectName })
+                    @Html.ActionLink( p.User.UserName, "Profile", "User", new { user = p.User.UserName }) / @Html.ActionLink(p.Project.ProjectName, "Detail", "Project", new { project = p.Project.ProjectName })
                     <br />
-                    <span>Created: <p>@p.project.CreationDate</p></span>
-                    <i class="truncate">@p.project.ProjectDescription</i>
-                    <p>@p.project.MusicalStyle</p>
+                    <span>Created: <p>@p.Project.CreationDate</p></span>
+                    <i class="truncate">@p.Project.ProjectDescription</i>
+                    <p>@p.Project.MusicalStyle</p>
                 </div>
             }
         }
