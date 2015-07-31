@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "MyPreferences";
+}
+
+<h2>My Preferences</h2>
+
+<div class="section">
+    <h4>Instruments that i like:</h4>
+    <br />
+    <p>
+        @foreach (var p in Model.Instruments)
+        {
+            @p.InstrumentName
+        }
+    </p>
+</div>
+<div class="section">
+    <h4>Styles that i hear: </h4>
+    <br />
+    <p>
+        @foreach (var p in Model.MusicalStyles)
+        {
+            @p.MusicalStyleName
+        }
+    </p>
+</div>

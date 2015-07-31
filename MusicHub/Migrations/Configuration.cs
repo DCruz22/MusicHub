@@ -16,7 +16,7 @@ namespace MusicHub.Migrations
 
         protected override void Seed(MusicHub.Models.MusicHubDB context)
         {
-            #region 
+            #region Genders
             context.Genders.AddOrUpdate(
                 p => p.GenderName,
                 new Gender { GenderName = "Male" },
@@ -24,7 +24,7 @@ namespace MusicHub.Migrations
                 );
             #endregion
 
-            #region
+            #region Countries
             context.Countries.AddOrUpdate(
                     p => p.CountryName,
                 new Country { CountryName = "Afghanistan", CountryCode = "AF" },
@@ -276,7 +276,7 @@ namespace MusicHub.Migrations
 
             #endregion
 
-            #region
+            #region MusicalStyles
             context.MusicalStyles.AddOrUpdate(
                 p => p.MusicalStyleName,
                 new MusicalStyle { MusicalStyleName = "Alternative"},
@@ -302,7 +302,7 @@ namespace MusicHub.Migrations
                 );
             #endregion
 
-            #region
+            #region Instruments
             context.Instruments.AddOrUpdate(
                 p => p.InstrumentName,
                 new Instrument { InstrumentName = "Bagpipes", InstrumentType = InstrumentTypes.Brass },
@@ -354,6 +354,11 @@ namespace MusicHub.Migrations
                 new Instrument { InstrumentName = "Xylophone", InstrumentType = InstrumentTypes.Brass },
                 new Instrument { InstrumentName = "Zither", InstrumentType = InstrumentTypes.Brass }
                 );   
+            #endregion
+
+            #region Badges
+            context.Badges.AddOrUpdate(
+                p => p.BadgeTitle);
             #endregion
 
         }

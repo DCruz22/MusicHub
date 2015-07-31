@@ -42,6 +42,25 @@ namespace MusicHub.Controllers
             return View(projects);
         }
 
+        public async Task<ActionResult> MyPreferences(string user)
+        {
+            PreferencesViewModel preferences = new PreferencesViewModel();
+
+            preferences.Instruments = (await _instrep.FilterAsync(x => x.User.UserName == user))
+                                      .Select(x => x.Instrument)
+                                      .ToList();
+
+            preferences.MusicalStyles = (await _musicrep.FilterAsync(x => x.User.UserName == user))
+                                 .Select(x => x.MusicalStyle)
+                                 .ToList();
+
+            return View(preferences);
+        }
+
+        public async Task<ActionResult> Badges()
+        {
+            return View();
+        }
 
         [Authorize]
         public async Task<ActionResult> Settings(string username)
@@ -58,6 +77,7 @@ namespace MusicHub.Controllers
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken()]
         public async Task<ActionResult> Settings(User user)
         {
             if (ModelState.IsValid)
@@ -84,7 +104,7 @@ namespace MusicHub.Controllers
             {
                 foreach(MusicalStyle style in styles)
                 {
-                    preferences.Styles.Add(style);
+                    preferences.MusicalStyles.Add(style);
                 }
             }
 
@@ -113,7 +133,7 @@ namespace MusicHub.Controllers
                 await _instrep.DeleteAsync(x => x.User.UserName == WebSecurity.CurrentUserName);
                 await _musicrep.DeleteAsync(x => x.User.UserName == WebSecurity.CurrentUserName);
 
-                foreach(MusicalStyle style in preferences.Styles)
+                foreach(MusicalStyle style in preferences.MusicalStyles)
                 {
                     user_styles.Add(new User_MusicalStyle()
                     {

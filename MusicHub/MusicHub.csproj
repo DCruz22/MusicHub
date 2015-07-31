@@ -188,6 +188,7 @@
     <Content Include="scripts\app.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\dropzone.js" />
     <Content Include="scripts\jquery-1.11.3.min.js" />
     <Content Include="scripts\jquery.signalR-2.2.0.js" />
     <Content Include="scripts\jquery.signalR-2.2.0.min.js" />
@@ -211,6 +212,7 @@
     <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="scripts\knockout-3.2.0.js" />
     <Content Include="scripts\materialize.js" />
     <Content Include="scripts\materialize.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
@@ -289,6 +291,7 @@
       <DependentUpon>RepositoryTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\StrategyAlgorithms\SearchProjectsAlgorithm.cs" />
+    <Compile Include="Data\StrategyAlgorithms\SuggestedProjectAlgorithm.cs" />
     <Compile Include="db.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -297,7 +300,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BadgesHelper.cs" />
     <Compile Include="Helpers\FilesHelper.cs" />
+    <Compile Include="Helpers\HelperExtensions.cs" />
+    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Hubs\MusicHub.cs" />
     <Compile Include="Migrations\201507110621120_first.cs" />
     <Compile Include="Migrations\201507110621120_first.Designer.cs">
@@ -351,6 +357,10 @@
     <Content Include="Views\User\Settings.cshtml" />
     <Content Include="Views\User\Preferences.cshtml" />
     <Content Include="Views\Project\Contents.cshtml" />
+    <Content Include="Views\User\Badges.cshtml" />
+    <Content Include="Views\User\MyPreferences.cshtml" />
+    <Content Include="Views\User\ChangeProfilePicture.cshtml" />
+    <Content Include="Views\Shared\_SettingsPanel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

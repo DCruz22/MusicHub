@@ -8,7 +8,7 @@ namespace MusicHub.ViewModels
 {
     public class PreferencesViewModel
     {
-        public List<MusicalStyle> Styles { get; set; }
+        public List<MusicalStyle> MusicalStyles { get; set; }
         public List<Instrument> Instruments { get; set; }
     }
 }
