@@ -31,7 +31,13 @@ namespace MusicHub.Controllers
         public async Task<ActionResult> User_Profile(string user)
         {
             User usr = await _usrrep.FindAsync(x => x.UserName == user);
-            return View(usr);
+
+            if(user != null)
+            {
+                return View(usr);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<ActionResult> MyProjects(string user)
@@ -59,17 +65,18 @@ namespace MusicHub.Controllers
 
         public async Task<ActionResult> Badges()
         {
+
             return View();
         }
 
         [Authorize]
-        public async Task<ActionResult> Settings(string username)
+        public async Task<ActionResult> Settings(string user)
         {
-            User user = (await _usrrep.FilterAsync(x => x.UserName == username)).ToList().FirstOrDefault();
+            User usr = (await _usrrep.FilterAsync(x => x.UserName == user)).ToList().FirstOrDefault();
 
-            if (user != null)
+            if (usr != null)
             {
-                return View(user);
+                return View(usr);
             }
 
             return RedirectToAction("Profile", "User", new { user = WebSecurity.CurrentUserName });

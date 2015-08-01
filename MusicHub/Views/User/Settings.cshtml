@@ -1,15 +1,12 @@
 ﻿@model MusicHub.Models.User
 
 @{
-    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_Logged_Layout.cshtml";
 }
 
-<h2>Settings</h2>
-
-<div class="container">
     <div class="row">
         <div class="col s4">
-            @Html.Partial("~Views/Shared/_SettingsPanel.cshtml")
+            @Html.Partial("~/Views/Shared/_SettingsPanel.cshtml")
         </div>
         <div class="col s8">
             @using (Html.BeginForm("Settings", "User", FormMethod.Post))
@@ -24,5 +21,3 @@
             }
         </div>
     </div>
-
-</div>

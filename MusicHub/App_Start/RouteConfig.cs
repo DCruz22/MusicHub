@@ -27,6 +27,23 @@ namespace MusicHub
             );
 
             routes.MapRoute(
+                name: "Picture",
+                url: "Settings/ChangePicture/{user}",
+                defaults: new { controller = "User", action = "ChangeProfilePicture" }
+            );
+
+            routes.MapRoute(
+                name: "Settings",
+                url: "Settings/BasicInfo/{user}",
+            defaults: new { controller = "User", action = "Settings" }
+            );
+
+            routes.MapRoute(
+                name: "Preferences",
+                url: "Settings/Preferences/{user}",
+                defaults: new { controller = "User", action = "Preferences" }
+            );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

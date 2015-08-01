@@ -1,8 +1,27 @@
 ﻿@model MusicHub.Models.User
 
 @{
-    Layout = "~/Views/Shared/_Logged_Layout.cshtml";
+    if(WebSecurity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Logged_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 }
 
 <h2>Profile</h2>
 
+<div class="row">
+    <div class="col s4">
+        <i>@Model.UserName</i>
+        <p>@Model.Name @Model.LastName</p>
+    </div>
+    <div class="col s8">
+        @if (WebSecurity.IsAuthenticated && WebSecurity.CurrentUserId == Model.UserId)
+        {
+            @Html.ActionLink("Edit profile", "Settings", "User", new { user = WebSecurity.CurrentUserName }, new { @class = "btn "})
+        }
+    </div>
+</div>

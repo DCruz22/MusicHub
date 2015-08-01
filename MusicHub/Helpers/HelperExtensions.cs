@@ -7,7 +7,7 @@ using System.Web.Mvc.Ajax;
 
 namespace MusicHub.Helpers
 {
-    public class HelperExtensions
+    public static class HelperExtensions
     {
         public static MvcHtmlString RawActionLink(this AjaxHelper ajaxHelper,
                                                   string linkText,

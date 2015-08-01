@@ -1,16 +1,13 @@
 ﻿@model MusicHub.ViewModels.PreferencesViewModel
 
 @{
-    ViewBag.Title = "Preferences";
+    Layout = "~/Views/Shared/_Logged_Layout.cshtml";
 }
-
-<div class="container">
     <div class="row">
         <div class="col s4">
-            @Html.Partial("~Views/Shared/_SettingsPanel.cshtml")
+            @Html.Partial("~/Views/Shared/_SettingsPanel.cshtml")
         </div>
         <div class="col s8">
             <h2>Preferences</h2>
         </div>
     </div>
-</div>
