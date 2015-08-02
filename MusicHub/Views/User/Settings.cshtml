@@ -4,20 +4,61 @@
     Layout = "~/Views/Shared/_Logged_Layout.cshtml";
 }
 
-    <div class="row">
-        <div class="col s4">
-            @Html.Partial("~/Views/Shared/_SettingsPanel.cshtml")
-        </div>
-        <div class="col s8">
-            @using (Html.BeginForm("Settings", "User", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-
-                @Html.ValidationSummary(true)
-
-                <div class="row">
-
-                </div>
-            }
-        </div>
+<div class="row">
+    <div class="col s4">
+        @Html.Partial("~/Views/Shared/_SettingsPanel.cshtml")
     </div>
+    <div class="col s8">
+        <h3>Basic info</h3>
+    </div>
+    @using (Html.BeginForm("Settings", "User", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.UserId)
+
+        <div class="col s8">
+            @Html.ValidationSummary(true)
+            <div class="row">
+                <div class="input-field col s6">
+                    @Html.LabelFor(x => x.Name)
+                    @Html.TextBoxFor(x => x.Name)
+                </div>
+                <div class="input-field col s6">
+                    @Html.LabelFor(x => x.LastName)
+                    @Html.TextBoxFor(x => x.LastName)
+                </div>
+                <div class="col s6">
+                    @Html.ValidationMessageFor(x => x.Name)
+                </div>
+                <div class="col s6">
+                    @Html.ValidationMessageFor(x => x.LastName)
+                </div>
+                <div class="input-field col s6">
+                    @Html.LabelFor(x => x.BirthDate)
+                    @Html.TextBoxFor(x => x.BirthDate, new { @class = "datepicker"})
+                </div>
+                <div class="input-field col s6">
+                    @Html.DropDownListFor(x => x.CountryId, null, "Choose your country", new { @type = "select" })
+                </div>
+                <div class="col s6">
+                    @Html.ValidationMessageFor(x => x.BirthDate)
+                </div>
+                <div class="col s6">
+                    @Html.ValidationMessageFor(x => x.CountryId)
+                </div>
+                <div class="input-field col s12">
+                    @Html.TextAreaFor(x => x.AboutMe, new { @class = "materialize-textarea" })
+                    @Html.LabelFor(x => x.AboutMe)
+                </div>
+                <div class="col s12">
+                    @Html.ValidationMessageFor(x => x.AboutMe)
+                </div>
+                <br />
+                <div class="col s12">
+                    <input type="submit" value="Save changes" class="btn blue darken-2" />
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

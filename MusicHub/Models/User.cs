@@ -19,12 +19,16 @@ namespace MusicHub.Models
         public string UserName { get; set; }
 
         public string Name { get; set; }
-
+        [Display(Name = "Last name")]
         public string LastName { get; set; }
 
+        [Required]
+        [Editable(false)]
         [DataType(DataType.Date)]
+        [Display(Name = "Date of birth")]
         public DateTime BirthDate { get; set; }
 
+        [Display(Name = "Country")]
         public int CountryId { get; set; }
 
         [ForeignKey("CountryId")]

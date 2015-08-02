@@ -26,6 +26,7 @@ namespace MusicHub.ViewModels
 
         [Required]
         [Editable(false)]
+        [DataType(DataType.Date)]
         [Display(Name = "Date of birth")]
         public DateTime BirthDate { get; set; }
 

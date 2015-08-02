@@ -10,18 +10,35 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 }
-
-<h2>Profile</h2>
-
+<br />
 <div class="row">
     <div class="col s4">
-        <i>@Model.UserName</i>
-        <p>@Model.Name @Model.LastName</p>
+        <div class="col s12">
+            <img src="@Url.Content(@Model.PhotoUrl)" id="PhotoUrl" class=" responsive-img" />
+        </div>
+        <div class="divider"></div>
+        <div class="col s12">
+            <h4>@Model.Name @Model.LastName</h4>
+            <h5><i>@Model.UserName</i></h5>
+        </div>
+        <div class="divider"></div>
+        <div class="col s12">
+            <p>@Model.Country.CountryName</p>
+            <p>Joined on @Model.JoinDate.ToShortDateString()</p>
+        </div>
+        <div class="divider"></div>
+        <div class="col s12">
+
+        </div>
     </div>
     <div class="col s8">
         @if (WebSecurity.IsAuthenticated && WebSecurity.CurrentUserId == Model.UserId)
         {
             @Html.ActionLink("Edit profile", "Settings", "User", new { user = WebSecurity.CurrentUserName }, new { @class = "btn "})
+        }
+        @if (WebSecurity.IsAuthenticated && Model.UserName != WebSecurity.CurrentUserName)
+        {
+            @Html.ActionLink("Follow", "Follow", "User", null, new { @class = "btn indigo lighten-2" })
         }
     </div>
 </div>

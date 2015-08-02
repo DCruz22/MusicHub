@@ -20,6 +20,8 @@ namespace MusicHub.Controllers
         private ProjectsRepository _projrep = new ProjectsRepository();
         private User_MusicalStylesRepository _musicrep = new User_MusicalStylesRepository();
         private User_InstrumentsRepository _instrep = new User_InstrumentsRepository();
+        private GendersRepository _genderep = new GendersRepository();
+        private CountriesRepository _countryrep = new CountriesRepository();
 
         [Authorize]
         public ActionResult Index(string user)
@@ -32,7 +34,7 @@ namespace MusicHub.Controllers
         {
             User usr = await _usrrep.FindAsync(x => x.UserName == user);
 
-            if(user != null)
+            if(usr != null)
             {
                 return View(usr);
             }
@@ -72,27 +74,42 @@ namespace MusicHub.Controllers
         [Authorize]
         public async Task<ActionResult> Settings(string user)
         {
+            if (!WebSecurity.CurrentUserName.Equals(user))
+            {
+                return RedirectToAction("Profile", "User", new { user = WebSecurity.CurrentUserName });
+            }
             User usr = (await _usrrep.FilterAsync(x => x.UserName == user)).ToList().FirstOrDefault();
 
             if (usr != null)
             {
+                ViewBag.CountryId = new SelectList(_countryrep.All(), "CountryId", "CountryName");
                 return View(usr);
             }
-
             return RedirectToAction("Profile", "User", new { user = WebSecurity.CurrentUserName });
         }
 
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken()]
-        public async Task<ActionResult> Settings(User user)
+        public async Task<ActionResult> Settings(User usr)
         {
-            if (ModelState.IsValid)
+            try
             {
-                await _usrrep.UpdateAsync(user);
+                if (ModelState.IsValid)
+                {
+                    ViewBag.CountryId = new SelectList(_countryrep.All().Where(x => x.CountryId == usr.CountryId), "CountryId", "CountryName");
+                    await _usrrep.UpdateAsync(usr);
+                    return RedirectToAction("Profile", new { user = WebSecurity.CurrentUserName });
+                }
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", "There was an error while updating the data.\n Please try again later.");
+                return View(usr);
             }
 
-            return View(user);
+            ViewBag.CountryId = new SelectList(_countryrep.All(), "CountryId", "CountryName");
+            return View(usr);
         }
 
         [Authorize]
@@ -135,33 +152,40 @@ namespace MusicHub.Controllers
 
             User user = (await _usrrep.FindAsync(x => x.UserName == WebSecurity.CurrentUserName));
 
-            if(ModelState.IsValid)
+            try
             {
-                await _instrep.DeleteAsync(x => x.User.UserName == WebSecurity.CurrentUserName);
-                await _musicrep.DeleteAsync(x => x.User.UserName == WebSecurity.CurrentUserName);
-
-                foreach(MusicalStyle style in preferences.MusicalStyles)
+                if (ModelState.IsValid)
                 {
-                    user_styles.Add(new User_MusicalStyle()
+                    await _instrep.DeleteAsync(x => x.User.UserName == WebSecurity.CurrentUserName);
+                    await _musicrep.DeleteAsync(x => x.User.UserName == WebSecurity.CurrentUserName);
+
+                    foreach (MusicalStyle style in preferences.MusicalStyles)
                     {
-                        MusicalStyle = style,
-                        User = user
-                    });
-                }
+                        user_styles.Add(new User_MusicalStyle()
+                        {
+                            MusicalStyle = style,
+                            User = user
+                        });
+                    }
 
-                foreach (Instrument instrument in preferences.Instruments)
-                {
-                    user_instruments.Add(new User_Instrument()
+                    foreach (Instrument instrument in preferences.Instruments)
                     {
-                        Instrument = instrument,
-                        User = user
-                    });
+                        user_instruments.Add(new User_Instrument()
+                        {
+                            Instrument = instrument,
+                            User = user
+                        });
+                    }
+
+                    await _instrep.CreateAsync(user_instruments);
+                    await _musicrep.CreateAsync(user_styles);
+                    return View();
                 }
-
-                await _instrep.CreateAsync(user_instruments);
-                await _musicrep.CreateAsync(user_styles);
-
-                return View();
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", "There was an error while updating the data.\n Please try again later.");
+                return View(preferences);
             }
             return View(preferences);
         }
