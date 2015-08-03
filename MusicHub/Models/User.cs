@@ -11,6 +11,8 @@ namespace MusicHub.Models
     [Table("Users")]
     public class User
     {
+        public User() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }

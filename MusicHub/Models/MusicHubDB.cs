@@ -32,5 +32,6 @@ namespace MusicHub.Models
         public DbSet<Project_Content> Project_Content { get; set; }
         public DbSet<Badge> Badges { get; set; }
         public DbSet<User_Badge> User_Badges { get; set; }
+        public DbSet<Feed> Feeds { get; set; }
     }
 }

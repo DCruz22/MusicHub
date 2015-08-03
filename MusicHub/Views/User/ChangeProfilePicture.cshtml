@@ -4,37 +4,29 @@
 }
 
     <div class="row">
-        <div class="col s4">
-            @Html.Partial("~/Views/Shared/_SettingsPanel.cshtml")
-        </div>
-        <div class="col s8">
-            <h3>Profile picture</h3>
-            @using (Ajax.BeginForm("ChangeProfilePicture", "User", null, new AjaxOptions()
-        {
-            HttpMethod = "POST",
-            OnComplete = "ChangeProfilePictureComplete"
-        }, new { role = "form" }))
-            {
-                <p class="field-validation-error">@ViewBag.Error</p>
+            <div class="col s4">
+                @Html.Partial("~/Views/Shared/_SettingsPanel.cshtml")
+            </div>
+            <div class="col s8 center">
+                <h3>Profile picture</h3>
+                @using (Html.BeginForm("_ChangeProfilePicture", "User", FormMethod.Post))
+                {
+                    <p class="field-validation-error">@ViewBag.Error</p>
+                    <div class="row">
+                        <div class="col s12">
+                            @Html.Hidden("photoTempUrl")
+                            <input type="submit" class="btn blue darken-2" value="Update picture" />
+                        </div>
+                    </div>
+                }
                 <div class="row">
                     <div class="col s12">
-                        @Html.Hidden("photoTempUrl")
-                        <input type="submit" class="btn blue darken-2" value="Update picture" />
+                        <form method="post" class="dropzone card" id="myDropZone" role="form">
+                            <div id="dropzone">
+                                <div class="dz-default dz-message"><span>Drop or select files here to upload</span></div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            }
-            <div class="row card">
-                <div class="col s12">
-                    <form method="post" class="dropzone" id="myDropZone" role="form">
-                        <div id="dropzone">
-                            <div class="dz-default dz-message"><span>Drop or select files here to upload</span></div>
-                        </div>
-                    </form>
-                </div>
             </div>
-        </div>
     </div>
-
-@section Scripts{
-        <script src="@Url.Content("~/scripts/dropzone.js")"></script>
-}

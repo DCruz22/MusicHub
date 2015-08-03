@@ -15,16 +15,21 @@
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(x => x.UserId)
+        @Html.HiddenFor(x => x.BirthDate)
+        @Html.HiddenFor(x => x.GenderId)
+        @Html.HiddenFor(x => x.JoinDate)
+        @Html.HiddenFor(x => x.PhotoUrl)
+        @Html.HiddenFor(x => x.UserName)
 
         <div class="col s8">
             @Html.ValidationSummary(true)
             <div class="row">
                 <div class="input-field col s6">
-                    @Html.LabelFor(x => x.Name)
+                    @Html.LabelFor(x => x.Name, new { @class = "active"})
                     @Html.TextBoxFor(x => x.Name)
                 </div>
                 <div class="input-field col s6">
-                    @Html.LabelFor(x => x.LastName)
+                    @Html.LabelFor(x => x.LastName, new { @class = "active" })
                     @Html.TextBoxFor(x => x.LastName)
                 </div>
                 <div class="col s6">
@@ -34,20 +39,20 @@
                     @Html.ValidationMessageFor(x => x.LastName)
                 </div>
                 <div class="input-field col s6">
-                    @Html.LabelFor(x => x.BirthDate)
-                    @Html.TextBoxFor(x => x.BirthDate, new { @class = "datepicker"})
+                    @Html.LabelFor(x => x.Email, new { @class = "active" })
+                    @Html.TextBoxFor(x => x.Email)
                 </div>
                 <div class="input-field col s6">
                     @Html.DropDownListFor(x => x.CountryId, null, "Choose your country", new { @type = "select" })
                 </div>
                 <div class="col s6">
-                    @Html.ValidationMessageFor(x => x.BirthDate)
+                    @Html.ValidationMessageFor(x => x.Email)
                 </div>
                 <div class="col s6">
                     @Html.ValidationMessageFor(x => x.CountryId)
                 </div>
                 <div class="input-field col s12">
-                    @Html.TextAreaFor(x => x.AboutMe, new { @class = "materialize-textarea" })
+                    @Html.TextAreaFor(x => x.AboutMe, new { @class = "materialize-textarea active" })
                     @Html.LabelFor(x => x.AboutMe)
                 </div>
                 <div class="col s12">

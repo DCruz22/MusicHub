@@ -1,12 +1,14 @@
-﻿<div class="row">
-    <h3>Settings</h3>
-    <div class="section">
-        @Html.ActionLink("Profile settings", "Settings", new { controller = "User"}, new { user = WebSecurity.CurrentUserName })
-    </div>
-    <div class="section">
-        @Html.ActionLink("Change profile picture", "ChangeProfilePicture", new { controller = "User" }, new { user = WebSecurity.CurrentUserName })
-    </div>
-    <div class="section">
-        @Html.ActionLink("Preference settings", "Preferences", new { controller = "User" }, new { user = WebSecurity.CurrentUserName })
+﻿<div class="row card">
+    <div class="container">
+        <h3>Settings</h3>
+        <div class="section">
+            @Html.ActionLink("Profile settings", "Settings", new { controller = "User" }, new { user = WebSecurity.CurrentUserName })
+        </div>
+        <div class="section">
+            @Html.ActionLink("Change profile picture", "ChangeProfilePicture", new { controller = "User" }, new { user = WebSecurity.CurrentUserName })
+        </div>
+        <div class="section">
+            @Html.ActionLink("Preference settings", "Preferences", new { controller = "User" }, new { user = WebSecurity.CurrentUserName })
+        </div>
     </div>
 </div>

@@ -247,6 +247,7 @@
     <Compile Include="Data\Reps\CountriesRepository.cs">
       <DependentUpon>RepositoryTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Reps\FeedsRepository.cs" />
     <Compile Include="Data\Reps\FriendshipsRepository.cs">
       <DependentUpon>RepositoryTemplate.tt</DependentUpon>
     </Compile>
@@ -319,6 +320,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\Friendship.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Project_Comment.cs" />
@@ -377,6 +379,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="public\profile_pictures\" />
     <Folder Include="public\temp\" />
   </ItemGroup>
   <ItemGroup>

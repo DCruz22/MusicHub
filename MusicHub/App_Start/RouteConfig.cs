@@ -26,11 +26,11 @@ namespace MusicHub
                 defaults: new { controller = "User", action = "Suggestions" }
             );
 
-            /*routes.MapRoute(
+            routes.MapRoute(
                 name: "Picture",
                 url: "Settings/ChangePicture/{user}",
                 defaults: new { controller = "User", action = "ChangeProfilePicture" }
-            );*/
+            );
 
             routes.MapRoute(
                 name: "Settings",

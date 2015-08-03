@@ -202,18 +202,18 @@ namespace MusicHub.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> ChangeProfilePicture(HttpPostedFile file, string photoTempUrl)
+        public async Task<ActionResult> _ChangeProfilePicture(string photoTempUrl)
         {
-
             if (!string.IsNullOrEmpty(photoTempUrl))
             {
                 string filePath = FilesHelper.movePostFile(photoTempUrl, FilesHelper.Photo_types.PROFILE_PICTURE);
                 User user = (await _usrrep.FindAsync(x => x.UserName == WebSecurity.CurrentUserName));
                 user.PhotoUrl = filePath;
                 await _usrrep.UpdateAsync(user);
+                return RedirectToAction("Profile", new { user = WebSecurity.CurrentUserName });
             }
             ViewBag.Error = "There isn't an image to select.";
-            return View();
+            return View("ChangeProfilePicture");
         }
 
         [Authorize]
