@@ -35,8 +35,13 @@ namespace MusicHub.Models
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
 
+        [Required]
+        [MaxLength(20)]
+        public string Name { get; set; }
+
         public string Content { get; set; }
 
-        public ContentType ContentType { get; set; }
+        public DateTime  Date { get; set; }
+
     }
 }

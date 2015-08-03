@@ -94,36 +94,6 @@ namespace MusicHub.Controllers
             return View(model);
         }
 
-        [Authorize]
-        public ActionResult PasswordReset(string Token)
-        {
-            if (!WebSecurity.IsAuthenticated || string.IsNullOrEmpty(Token))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View();
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<ActionResult> PasswordReset(PasswordReset PasswordReset, string Token)
-        {
-            if (ModelState.IsValid)
-            {
-                int userId = WebSecurity.GetUserIdFromPasswordResetToken(Token);
-                User user = await _usrep.FindAsync(a => a.UserId == userId);
-
-                WebSecurity.ResetPassword(Token, PasswordReset.ConfirmPassword);
-                WebSecurity.Login(user.UserName, PasswordReset.ConfirmPassword, persistCookie: false);
-
-                return RedirectToAction("Index", "User", new { user = WebSecurity.CurrentUserName});
-            }
-
-            return View();
-        }
- 
-
         public ActionResult LogOff()
         {
             WebSecurity.Logout();

@@ -1,8 +1,99 @@
-﻿@model IEnumerable<MusicHub.Models.Project_Comment>
+﻿@model MusicHub.ViewModels.ProjectCommentViewModel
 
 @{
-    ViewBag.Title = "Comment";
+    Layout = "~/Views/Shared/_Logged_Layout.cshtml";
 }
 
-<h2>Comment</h2>
+<div class="row">
+    <div class="col s4">
+        <div class="row card">
+            <div class="container">
+                <h3>Project menu</h3>
+                <div class="section">
+                    @Html.ActionLink("Details", "Project", new { projectname = ViewBag.ProjectName })
+                </div>
+                <div class="divider"></div>
+                <div class="section">
+                    @Html.ActionLink("Comments", "Comments", new { projectname = ViewBag.ProjectName })
+                </div>
+                <div class="divider"></div>
+                <div class="section">
+                    @Html.ActionLink("Contents", "Contents", new { projectname = ViewBag.ProjectName })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s8">
+        <div class="row">
+            <div class="col s4">
+                @Html.ActionLink((string)ViewBag.UserName , "Profile", "User", new { user = ViewBag.UserName }, null) / @ViewBag.ProjectName
+            </div>
+            <div class="col s4">
+                @if (WebSecurity.CurrentUserName != ViewBag.UserName)
+                {
 
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col s8">
+        <div class="row">
+            @if (Model.PastComments.Count() > 0)
+            {
+                foreach (var p in Model.PastComments)
+                {
+                    <div class="col s12 m8 offset-m2 l6 offset-l3">
+                        <div class="card-panel grey lighten-5 z-depth-1">
+                            <div class="row valign-wrapper">
+                                <div class="col s2">
+                                    <img src="@Url.Content(p.User.PhotoUrl)" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                                </div>
+                                <div class="col s10">
+                                    <span class="black-text">
+                                        @p.Comment
+                                    </span>
+                                </div>
+                                <div class="col s12 right-align">
+                                    <time datetime="@p.Date" class="age"></time>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col s12">
+                    <p>No comments on this project.</p>
+                    <p>Be the first to add one.</p>
+                </div>
+            }
+            @if (WebSecurity.IsAuthenticated)
+                {
+                    using (Html.BeginForm("Comments", "Project", FormMethod.Post))
+                    {
+                        @Html.Hidden("projectname", (string)ViewBag.ProjectName)
+                        <div class="col s12">
+                            <span>New comment:</span>
+                            @Html.TextBoxFor(x => x.NewComment.Comment)
+                        </div>
+                        <div class="col s12">
+                            @Html.ValidationMessageFor(x => x.NewComment.Comment)
+                        </div>
+                        <div class="col s12 right-align">
+                            <input type="submit" value="Comment" class="btn green darken-3" />
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".age").age();
+        });
+    </script>
+}

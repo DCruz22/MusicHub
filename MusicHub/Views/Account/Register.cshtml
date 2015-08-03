@@ -1,11 +1,8 @@
 ﻿@model MusicHub.ViewModels.RegisterViewModel
-
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Register</h2>
-
 <div class="container">
     @using (Html.BeginForm("Register", "Account", FormMethod.Post))
     {
@@ -13,47 +10,75 @@
 
         @Html.ValidationSummary(true)
 
-        @Html.TextBoxFor(x => x.UserName, new { @placeholder = "Username" })
-        <br />
-        @Html.ValidationMessageFor(x => x.UserName)
-        <br />
-        @Html.TextBoxFor(x => x.Email, new { @placeholder = "Email" })
-        <br />
-        @Html.ValidationMessageFor(x => x.Email)
-        <br />
-        @Html.TextBoxFor(x => x.Name, new { @placeholder = "Name" })
-        <br />
-        @Html.ValidationMessageFor(x => x.Name)
-        <br />
-        @Html.TextBoxFor(x => x.LastName, new { @placeholder = "Last name" })
-        <br />
-        @Html.ValidationMessageFor(x => x.LastName)
-        <br />
-        @Html.TextBoxFor(x => x.BirthDate, new { @class = "datepicker", @placeholder = "Birthdate" })
-        <br />
-        @Html.ValidationMessageFor(x => x.BirthDate)
-        <br />
-        @Html.DropDownListFor(x => x.GenderId, null, "Choose your gender", new { @type = "select" })
-        <br />
-        @Html.ValidationMessageFor(x => x.GenderId)
-        <br />
-        @Html.DropDownListFor(x => x.CountryId, null, "Choose your country", new { @type = "select" })
-        <br />
-        @Html.ValidationMessageFor(x => x.CountryId)
-        <br />
-        @Html.TextAreaFor(x => x.AboutMe, new { @class = "materialize-textarea", @placeholder = "About me" })
-        <br />
-        @Html.ValidationMessageFor(x => x.AboutMe)
-        <br />
-        @Html.TextBoxFor(x => x.Password, new { @placeholder = "Password", @type = "Password" })
-        <br />
-        @Html.ValidationMessageFor(x => x.Password)
-        <br />
-        @Html.TextBoxFor(x => x.ConfirmPassword, new { @placeholder = "Confirm your password", @type = "Password" })
-        <br />
-        @Html.ValidationMessageFor(x => x.ConfirmPassword)
-        <br />
-
-        <input type="submit" value="Register" class="btn blue darken-2" />
+        <div class="col s6">
+            @Html.LabelFor(x => x.UserName)
+            @Html.TextBoxFor(x => x.UserName)
+        </div>
+        <div class="col s6">
+            @Html.LabelFor(x => x.Email)
+            @Html.TextBoxFor(x => x.Email)
+        </div>
+        <div class="col s6">
+            @Html.ValidationMessageFor(x => x.UserName)
+        </div>
+        <div class="col s6">
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+        <div class="col s4">
+            @Html.LabelFor(x => x.Name)
+            @Html.TextBoxFor(x => x.Name)
+        </div>
+        <div class="col s4">
+            @Html.LabelFor(x => x.LastName)
+            @Html.TextBoxFor(x => x.LastName)
+        </div>
+        <div class="col s4">
+            @Html.LabelFor(x => x.BirthDate)
+            @Html.TextBoxFor(x => x.BirthDate, new { @class = "datepicker" })
+        </div>
+        <div class="col s4">
+            @Html.ValidationMessageFor(x => x.Name)
+        </div>
+        <div class="col s4">
+            @Html.ValidationMessageFor(x => x.LastName)
+        </div>
+        <div class="col s4">
+            @Html.ValidationMessageFor(x => x.BirthDate)
+        </div>
+        <div class="col s6">
+            @Html.DropDownListFor(x => x.GenderId, null, "Choose your gender", new { @type = "select" })
+        </div>
+        <div class="col s6">
+            @Html.DropDownListFor(x => x.CountryId, null, "Choose your country", new { @type = "select" })
+        </div>
+        <div class="col s6">
+            @Html.ValidationMessageFor(x => x.GenderId)
+        </div>
+        <div class="col s6">
+            @Html.ValidationMessageFor(x => x.CountryId)
+        </div>
+        <div class="col s12">
+            @Html.LabelFor(x => x.AboutMe)
+            @Html.TextAreaFor(x => x.AboutMe, new { @class = "materialize-textarea"})
+        </div>
+        <div class="col s12">
+            @Html.ValidationMessageFor(x => x.AboutMe)
+        </div>
+        <div class="col s12">
+            @Html.TextBoxFor(x => x.Password, new { @placeholder = "Password", @type = "Password" })
+        </div>
+        <div class="col s12">
+            @Html.ValidationMessageFor(x => x.Password)
+        </div>
+        <div class="col s12">
+            @Html.LabelFor(x => x.ConfirmPassword)
+            @Html.TextBoxFor(x => x.ConfirmPassword, new { @type = "Password" })
+        </div>
+        <div class="col s12" >
+            @Html.ValidationMessageFor(x => x.ConfirmPassword)
+        </div>
+        <div class="col s12 center">
+            <input type="submit" value="Register" class="btn blue darken-2" />
+        </div>
     }
 </div>

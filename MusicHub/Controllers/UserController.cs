@@ -16,12 +16,9 @@ namespace MusicHub.Controllers
     public class UserController : Base
     {
         // GET: User
-        private UserRepository _usrrep = new UserRepository();
-        private ProjectsRepository _projrep = new ProjectsRepository();
         private User_MusicalStylesRepository _musicrep = new User_MusicalStylesRepository();
         private User_InstrumentsRepository _instrep = new User_InstrumentsRepository();
-        private GendersRepository _genderep = new GendersRepository();
-        private CountriesRepository _countryrep = new CountriesRepository();
+        private FriendshipsRepository _friendrep = new FriendshipsRepository();
 
         [Authorize]
         public ActionResult Index(string user)
@@ -35,6 +32,16 @@ namespace MusicHub.Controllers
         {
             User usr = await _usrrep.FindAsync(x => x.UserName == user);
             ViewBag.IsOwner = IsOwner(usr.UserId);
+
+            if (!IsOwner(usr.UserId))
+            {
+                Friendship friendship = (await _friendrep.FilterAsync(x => x.UserId_follower == WebSecurity.CurrentUserId && x.UserId_followed == usr.UserId)).FirstOrDefault();
+
+                if (friendship != null)
+                {
+                    ViewBag.IsFollowing = true;
+                }
+            }
 
             if(usr != null)
             {
@@ -113,6 +120,36 @@ namespace MusicHub.Controllers
             ViewBag.CountryId = new SelectList(_countryrep.All(), "CountryId", "CountryName");
             return View(usr);
         }
+
+        [Authorize]
+        public ActionResult PasswordReset(string user)
+        {
+            if (!WebSecurity.IsAuthenticated || string.IsNullOrEmpty(user))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> PasswordReset(PasswordReset PasswordReset, string Token)
+        {
+            if (ModelState.IsValid)
+            {
+                int userId = WebSecurity.GetUserIdFromPasswordResetToken(Token);
+                User user = await _usrrep.FindAsync(a => a.UserId == userId);
+
+                WebSecurity.ResetPassword(Token, PasswordReset.ConfirmPassword);
+                WebSecurity.Login(user.UserName, PasswordReset.ConfirmPassword, persistCookie: false);
+
+                return RedirectToAction("Profile", "User", new { user = WebSecurity.CurrentUserName });
+            }
+
+            return View();
+        }
+ 
 
         [Authorize]
         public async Task<ActionResult> Preferences(string user)
@@ -223,10 +260,46 @@ namespace MusicHub.Controllers
         }
 
         [Authorize]
-        [ChildActionOnly]
-        public ActionResult Follow()
+        [HttpPost]
+        public ActionResult Follow(int userId)
         {
-            return View();
+            Friendship friendshipFromDb = _friendrep.Find(a => a.UserId_follower == WebSecurity.CurrentUserId &&
+                                                        a.UserId_followed == userId);
+
+            //Follow
+            if (friendshipFromDb == null)
+            {
+                Friendship friendship = new Friendship()
+                {
+                    UserId_follower = WebSecurity.CurrentUserId,
+                    UserId_followed = userId,
+                    Date = (DateTime.Now).ToUniversalTime().AddMinutes(double.Parse((string)Session["UTCOffset"] ?? "-300.00"))
+                };
+
+                _friendrep.Create(friendship);
+
+                return Json(new
+                {
+                    result = "<span id=\"btnfriendship\">Unfollow</span>",
+                    userFollowedId = userId,
+                    userFollowerId = WebSecurity.CurrentUserId
+
+                });
+            }
+            else
+            {
+                //Unfollow 
+
+                _friendrep.Delete(friendshipFromDb);
+
+                return Json(new
+                {
+                    result = "<span class=\"glyphicon glyphicon-ok-sign\"></span> <span id=\"btnfriendship\">Follow</span>",
+                    userFollowedId = userId,
+                    userFollowerId = WebSecurity.CurrentUserId
+
+                });
+            }
         }
     }
 }

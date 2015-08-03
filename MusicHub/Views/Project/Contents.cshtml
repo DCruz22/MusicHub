@@ -1,8 +1,115 @@
-﻿@model IEnumerable<MusicHub.Models.Project_Content>
+﻿@model MusicHub.ViewModels.ProjectContentViewModel
 
 @{
-    ViewBag.Title = "Content";
-    Layout = "~/Views/Shared/_Logged_Layout.cshtml";
+    if(WebSecurity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Logged_Layout.cshtml";        
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Result_Layout.cshtml";        
+    }
 }
 
-<h2>Content</h2>
+<div class="row">
+    <div class="col s4">
+        <div class="row card">
+            <div class="container">
+                <h3>Project menu</h3>
+                <div class="section">
+                    @Html.ActionLink("Details", "Project", new { projectname = ViewBag.ProjectName })
+                </div>
+                <div class="divider"></div>
+                <div class="section">
+                    @Html.ActionLink("Comments", "Comments", new { projectname = ViewBag.ProjectName })
+                </div>
+                <div class="divider"></div>
+                <div class="section">
+                    @Html.ActionLink("Contents", "Contents", new { projectname = ViewBag.ProjectName })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s8">
+        <div class="row">
+            <div class="col s4">
+                @Html.ActionLink((string)ViewBag.UserName, "Profile", "User", new { user = ViewBag.UserName }, null) / @ViewBag.ProjectName
+            </div>
+            <div class="col s4">
+                @if (WebSecurity.CurrentUserName != ViewBag.UserName)
+                {
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col s8">
+        <div class="row">
+            @if (Model.Past_Contents.Count() > 0)
+            {
+                foreach (var p in Model.Past_Contents)
+                {
+                    <div class="col s12 m8 offset-m2 l6 offset-l3">
+                        <div class="card-panel grey lighten-5 z-depth-1">
+                            <div class="row valign-wrapper">
+                                <div class="col s4">
+                                    <img src="@Url.Content(p.Content)" alt="" class="circle responsive-img">
+                                </div>
+                                <div class="col s8">
+                                    <span class="black-text">
+                                        @p.Name
+                                    </span>
+                                </div>
+                                <div class="col s12 right-align">
+                                    <time datetime="@p.Date" class="age"></time>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col s12">
+                    <p>No content on this project.</p>
+                </div>
+            }
+            @if (ViewBag.IsOwner)
+            {
+                using (Html.BeginForm("Comments", "Project", FormMethod.Post))
+                {
+                    <p class="field-validation-error">@ViewBag.Error</p>
+                    @Html.Hidden("photoTempUrl")
+                    @Html.Hidden("projectname", (string)ViewBag.ProjectName)
+                    <div class="col s12">
+                        <span>Name:</span>
+                        @Html.TextBoxFor(x => x.New_Content.Name)
+                    </div>
+                    <div class="col s12">
+                        @Html.ValidationMessageFor(x => x.New_Content.Name)
+                    </div>
+                    <div class="col s12 right-align">
+                        <input type="submit" value="Comment" class="btn green darken-3" />
+                    </div>
+                }
+                <div class="row">
+                    <div class="col s12">
+                        <form method="post" class="dropzone card" id="myDropZone" role="form">
+                            <div id="dropzone">
+                                <div class="dz-default dz-message"><span>Drop or select files here to upload</span></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".age").age();
+        });
+    </script>
+}

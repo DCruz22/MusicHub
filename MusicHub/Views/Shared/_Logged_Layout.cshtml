@@ -18,10 +18,9 @@
                 <li>
                     @using (Html.BeginForm("Results", "Home", FormMethod.Get))
                     {
-                        <input type="text" name="search" class="white black-text" placeholder="search..."/>
+                        <input type="text" name="search" class="white black-text" placeholder="Search for a User..."/>
                     }
                 </li>
-                <li>@Html.ActionLink("Suggestions", "Suggestions", new { user = WebSecurity.CurrentUserName})</li>
                 <li>@Html.ActionLink("My Profile", "Profile", new { user = WebSecurity.CurrentUserName})</li>
                 <li>@Html.ActionLink("Log out","Logoff", "Account")</li>
             </ul>
@@ -40,8 +39,10 @@
     <script src="~/Scripts/materialize.min.js"></script>    
     @Scripts.Render("~/bundles/jqueryval");    
     @Scripts.Render("~/bundles/jqueryAjax");
-    @RenderSection("Scripts", false)
+    @Scripts.Render("~/bundles/signalR")
+    <script src="@Url.Content("~/scripts/jquery.age.js")"></script>
     <script src="@Url.Content("~/Scripts/dropzone.js")"></script>
     <script src="@Url.Content("~/Scripts/app.js")"></script>
+    @RenderSection("Scripts", false)
 </body>
 </html>

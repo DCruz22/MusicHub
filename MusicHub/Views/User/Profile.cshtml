@@ -1,5 +1,5 @@
 ﻿@model MusicHub.Models.User
-
+@using MusicHub.Helpers 
 @{
     Layout = "~/Views/Shared/_Logged_Layout.cshtml";
 }
@@ -39,7 +39,24 @@
         }
         @if (WebSecurity.IsAuthenticated && Model.UserName != WebSecurity.CurrentUserName)
         {
-            @Html.ActionLink("Follow", "Follow", "User", null, new { @class = "btn indigo lighten-2" })
+            String isFollowing = ViewBag.IsFollowing ? "Unfollow" : "Follow";
+
+            <p>
+                @Ajax.RawActionLink("<span id=\"friendshipContainer-" + Model.UserId + "\"><span id=\"btnfriendship\">" + isFollowing + "</span></span>",
+                                                        "FriendShip", "User",
+                                                        new { userId = Model.UserId },
+                                                        new AjaxOptions()
+                                                        {
+                                                            HttpMethod = "POST",
+                                                            OnSuccess = "FriendShipSuccess"
+
+                                                        }, new
+                                                        {
+                                                            @class = "btn blue darken-1"
+                                                        })
+            </p>
+
         }
+        <h6><i>@Model.AboutMe</i></h6>
     </div>
 </div>

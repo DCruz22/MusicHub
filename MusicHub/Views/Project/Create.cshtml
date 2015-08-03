@@ -4,5 +4,31 @@
     ViewBag.Title = "~/Views/Shared/_Logged_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
+<div class="container">
+    <h2>Create a project.</h2>
+    <div class="row card">
+        @using (Html.BeginForm("Create", "Project", FormMethod.Post))
+        {
+            <div class="col s6">
+                @Html.LabelFor(x => x.ProjectName)
+                @Html.TextBoxFor(x => x.ProjectName)
+            </div>
+            <div class="col s6">
+                @Html.DropDownListFor(x => x.MusicalStyleId, null, "Choose a musical style", new { @type = "select" })
+            </div>
+            <div class="col s6">
+                @Html.ValidationMessageFor(x => x.ProjectName)
+            </div>
+            <div class="col s6">
+                @Html.ValidationMessageFor(x => x.MusicalStyleId)
+            </div>
+            <div class="col s12">
+                @Html.LabelFor(x => x.ProjectDescription)
+                @Html.TextAreaFor(x => x.ProjectDescription, new { @class = "materialize-textarea" })
+            </div>
+            <div class="col s12 center">
+                <input type="submit" value="create project" class="btn blue darken-2" />
+            </div>
+        }
+    </div>
+</div>

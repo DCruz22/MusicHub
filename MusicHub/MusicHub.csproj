@@ -190,6 +190,7 @@
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\dropzone.js" />
     <Content Include="scripts\jquery-1.11.3.min.js" />
+    <Content Include="scripts\jquery.age.js" />
     <Content Include="scripts\jquery.signalR-2.2.0.js" />
     <Content Include="scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="scripts\jquery.tokenize.js" />
@@ -299,6 +300,7 @@
       <DependentUpon>RepositoryTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\StrategyAlgorithms\SearchProjectsAlgorithm.cs" />
+    <Compile Include="Data\StrategyAlgorithms\SearchUserAlgorithm.cs" />
     <Compile Include="Data\StrategyAlgorithms\SuggestedProjectAlgorithm.cs" />
     <Compile Include="db.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -312,6 +314,7 @@
     <Compile Include="Helpers\FilesHelper.cs" />
     <Compile Include="Helpers\HelperExtensions.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Hubs\ConnectionMapping.cs" />
     <Compile Include="Hubs\MusicHub.cs" />
     <Compile Include="Migrations\201507110621120_first.cs" />
     <Compile Include="Migrations\201507110621120_first.Designer.cs">
@@ -342,7 +345,7 @@
     <Compile Include="ViewModels\PreferencesViewModel.cs" />
     <Compile Include="ViewModels\ProjectContentViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
-    <Compile Include="ViewModels\Project_CommentViewModel.cs" />
+    <Compile Include="ViewModels\ProjectCommentViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +373,8 @@
     <Content Include="Views\User\MyPreferences.cshtml" />
     <Content Include="Views\User\ChangeProfilePicture.cshtml" />
     <Content Include="Views\Shared\_SettingsPanel.cshtml" />
+    <Content Include="Views\User\PasswordReset.cshtml" />
+    <Content Include="Views\Home\User_Results.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

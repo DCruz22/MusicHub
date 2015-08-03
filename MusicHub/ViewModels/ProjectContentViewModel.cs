@@ -8,7 +8,7 @@ namespace MusicHub.ViewModels
 {
     public class ProjectContentViewModel
     {
-        public Project Project { get; set; }
-        public IEnumerable<Project_Content> Contents { get; set; }
+        public Project_Content New_Content { get; set; }
+        public IEnumerable<Project_Content> Past_Contents { get; set; }
     }
 }

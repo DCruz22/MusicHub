@@ -3,11 +3,50 @@
 @{
     Layout = "~/Views/Shared/_Logged_Layout.cshtml";
 }
+<link href="@Url.Content("~/Content/style/jquery.tokenize.css")" rel="stylesheet" />
     <div class="row">
         <div class="col s4">
             @Html.Partial("~/Views/Shared/_SettingsPanel.cshtml")
         </div>
         <div class="col s8">
             <h2>Preferences</h2>
+            @using (Html.BeginForm("Preferences", "User", FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col s12">
+                        <label for="Instruments">Favourites instruments:</label>
+                        @Html.DropDownListFor(x => x.Instruments, null, new { @class = "tokenizer"})
+                    </div>
+                    <div class="col s12">
+                        @Html.ValidationMessageFor(x => x.Instruments)
+                    </div>
+                    <div class="col s12">
+                        <label for="Instruments">Favourites styles:</label>
+                        @Html.DropDownListFor(x => x.MusicalStyles, null, new { @class = "tokenizer" })
+                    </div>
+                    <div class="col s12">
+                        @Html.ValidationMessageFor(x => x.MusicalStyles)
+                    </div>
+                    <div class="col s12 center">
+                        <input type="submit" value="save preferences" class="btn blue darken-2" />
+                    </div>
+                </div>
+            }
         </div>
     </div>
+
+@section Scripts{
+    
+    <script src="@Url.Content("~/scripts/jquery.tokenize.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#Instruments").tokenize({
+
+            });
+
+            $("#MusicalStyles").tokenize();
+
+        });
+    </script>
+    }

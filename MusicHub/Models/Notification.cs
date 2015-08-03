@@ -26,7 +26,7 @@ namespace MusicHub.Models
         public virtual User User { get; set; }
 
         public string NotificationDescription { get; set; }
-        public NotificationTypes NotificationType { get; set; }
         public string Url { get; set; }
+        public DateTime Date { get; set; }
     }
 }

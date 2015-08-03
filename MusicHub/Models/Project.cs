@@ -25,14 +25,13 @@ namespace MusicHub.Models
         [Required]
         public string ProjectDescription { get; set; }
 
-        [Required]
         public DateTime CreationDate { get; set; }
 
+        [Required]
+        [Display(Name = "Musical style")]
         public int MusicalStyleId { get; set; }
 
         [ForeignKey("MusicalStyleId")]
         public virtual MusicalStyle MusicalStyle { get; set; }
-
-        public int Rate { get; set; }
     }
 }

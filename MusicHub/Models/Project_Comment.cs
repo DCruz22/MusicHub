@@ -29,8 +29,8 @@ namespace MusicHub.Models
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
         [Required]
+        [MaxLength(255)]
         public string Comment { get; set; }
-        public CommentType  CommentType { get; set; }
 
         public DateTime Date { get; set; }
     }

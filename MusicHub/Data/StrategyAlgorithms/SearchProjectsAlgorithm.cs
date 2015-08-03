@@ -11,19 +11,19 @@ namespace MusicHub.Data.StrategyAlgorithms
 {
     public class SearchProjectsAlgorithm
     {
-        public string word { get; set; }
+        public string filter { get; set; }
 
         private ProjectsRepository _projrep = new ProjectsRepository();
         private UserRepository _usrrep = new UserRepository();
 
-        public SearchProjectsAlgorithm(string word)
+        public SearchProjectsAlgorithm(string filter)
         {
-            this.word = word;
+            this.filter = filter;
         }
 
         public IEnumerable<ProjectViewModel> SearchProjects()
         {
-            List<Project> projects = _projrep.Filter(x => x.ProjectName.Contains(word))
+            List<Project> projects = _projrep.Filter(x => x.ProjectName.Contains(filter))
                                      .OrderByDescending(x => x.CreationDate)
                                      .ToList();
 
@@ -47,7 +47,7 @@ namespace MusicHub.Data.StrategyAlgorithms
 
         public async Task<IEnumerable<ProjectViewModel>> SearchProjectsAsync()
         {
-            List<Project> projects = (await _projrep.FilterAsync(x => x.ProjectName.Contains(word)))
+            List<Project> projects = (await _projrep.FilterAsync(x => x.ProjectName.Contains(filter)))
                                             .OrderByDescending(x => x.CreationDate)
                                             .ToList();
 
