@@ -1,20 +1,20 @@
 ﻿@model MusicHub.Models.User
 
 @{
-    if(WebSecurity.IsAuthenticated)
-    {
-        Layout = "~/Views/Shared/_Logged_Layout.cshtml";
-    }
-    else
-    {
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+    Layout = "~/Views/Shared/_Logged_Layout.cshtml";
 }
 <br />
 <div class="row">
     <div class="col s4">
         <div class="col s12">
-            <img src="@Url.Content(@Model.PhotoUrl)" id="PhotoUrl" class=" responsive-img" />
+            @if (ViewBag.IsOwner)
+            {
+                <a href="@Url.Action("ChangeProfilePicture", new { user = WebSecurity.CurrentUserName})"><img alt="Change" src="@Url.Content(@Model.PhotoUrl)" id="PhotoUrl" class="circle responsive-img" /></a>
+            }
+            else
+            {
+                <img src="@Url.Content(@Model.PhotoUrl)" id="PhotoUrl" class="circle responsive-img" />
+            }
         </div>
         <div class="divider"></div>
         <div class="col s12">
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="col s8">
-        @if (WebSecurity.IsAuthenticated && WebSecurity.CurrentUserId == Model.UserId)
+        @if (ViewBag.IsOwner)
         {
             @Html.ActionLink("Edit profile", "Settings", "User", new { user = WebSecurity.CurrentUserName }, new { @class = "btn "})
         }

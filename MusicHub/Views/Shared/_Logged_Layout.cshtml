@@ -21,8 +21,8 @@
                         <input type="text" name="search" class="white black-text" placeholder="search..."/>
                     }
                 </li>
-                <li>@Html.ActionLink("Suggestions", "Suggestions", new { controller = "User"}, new { user = WebSecurity.CurrentUserName})</li>
-                <li>@Html.ActionLink("My Profile", "Profile", new { controller = "User"} , new { user = WebSecurity.CurrentUserName})</li>
+                <li>@Html.ActionLink("Suggestions", "Suggestions", new { user = WebSecurity.CurrentUserName})</li>
+                <li>@Html.ActionLink("My Profile", "Profile", new { user = WebSecurity.CurrentUserName})</li>
                 <li>@Html.ActionLink("Log out","Logoff", "Account")</li>
             </ul>
         </div>
@@ -37,8 +37,10 @@
         </div>
     </div>
     <script src="~/Scripts/jquery-1.11.3.min.js"></script>
-    <script src="~/Scripts/materialize.min.js"></script>
-    @Scripts.Render("~/bundles/jqueryval");
+    <script src="~/Scripts/materialize.min.js"></script>    
+    @Scripts.Render("~/bundles/jqueryval");    
+    @Scripts.Render("~/bundles/jqueryAjax");
     <script src="@Url.Content("~/Scripts/app.js")"></script>
+    @RenderSection("Scripts", false)
 </body>
 </html>

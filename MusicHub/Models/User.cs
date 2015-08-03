@@ -18,6 +18,7 @@ namespace MusicHub.Models
         [MaxLength(15)]
         public string UserName { get; set; }
 
+        [MaxLength(100)]
         public string Name { get; set; }
         [Display(Name = "Last name")]
         public string LastName { get; set; }
@@ -43,6 +44,7 @@ namespace MusicHub.Models
         public DateTime JoinDate { get; set; }
         
         [EmailAddress]
+        [MaxLength(100)]
         public string Email { get; set; }
 
         public string AboutMe { get; set; }

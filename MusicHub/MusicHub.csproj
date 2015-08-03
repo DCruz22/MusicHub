@@ -215,6 +215,12 @@
     <Content Include="scripts\knockout-3.2.0.js" />
     <Content Include="scripts\materialize.js" />
     <Content Include="scripts\materialize.min.js" />
+    <Content Include="scripts\MicrosoftAjax.debug.js" />
+    <Content Include="scripts\MicrosoftAjax.js" />
+    <Content Include="scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="scripts\MicrosoftMvcAjax.js" />
+    <Content Include="scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="scripts\MicrosoftMvcValidation.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="scripts\mvcfoolproof.unobtrusive.min.js" />
     <Content Include="scripts\MvcFoolproofJQueryValidation.min.js" />
@@ -226,6 +232,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Base.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstrumentsController.cs" />
     <Compile Include="Controllers\MusicalStyleController.cs" />
@@ -370,6 +377,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="public\temp\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201507110621120_first.resx">

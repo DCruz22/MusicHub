@@ -13,7 +13,7 @@ using MusicHub.Data.StrategyAlgorithms;
 
 namespace MusicHub.Controllers
 {
-    public class UserController : Controller
+    public class UserController : Base
     {
         // GET: User
         private UserRepository _usrrep = new UserRepository();
@@ -29,10 +29,12 @@ namespace MusicHub.Controllers
             return View();
         }
 
+        [Authorize]
         [ActionName("Profile")]
         public async Task<ActionResult> User_Profile(string user)
         {
             User usr = await _usrrep.FindAsync(x => x.UserName == user);
+            ViewBag.IsOwner = IsOwner(usr.UserId);
 
             if(usr != null)
             {
@@ -210,6 +212,7 @@ namespace MusicHub.Controllers
                 user.PhotoUrl = filePath;
                 await _usrrep.UpdateAsync(user);
             }
+            ViewBag.Error = "There isn't an image to select.";
             return View();
         }
 

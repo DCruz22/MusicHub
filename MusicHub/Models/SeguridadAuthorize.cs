@@ -14,7 +14,7 @@ namespace MusicHub.Models
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (WebSecurity.IsAuthenticated) filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "User", action = "Index" }));
+            if (WebSecurity.IsAuthenticated) filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "User", action = "Index", user = WebSecurity.CurrentUserName }));
         }
     }
 }

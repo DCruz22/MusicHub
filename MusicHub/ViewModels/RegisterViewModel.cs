@@ -17,11 +17,13 @@ namespace MusicHub.ViewModels
 
         [Required]
         [Display(Name = "Last Name")]
+        [MaxLength(100)]
         public string LastName { get; set; }
 
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
+        [MaxLength(100)]
         public string Email { get; set; }
 
         [Required]
@@ -43,6 +45,7 @@ namespace MusicHub.ViewModels
 
         [Required]
         [Display(Name = "Username")]
+        [MaxLength(15)]
         public string UserName { get; set; }
 
         [Required]

@@ -38,9 +38,8 @@ namespace MusicHub.Helpers
             return "~\\" + CMS_TEMP_PATH + "\\" + filename;
         }
 
-        public static string SaveFile(HttpPostedFileBase hpf, string type)
+        public static string SaveFile(HttpPostedFileBase hpf, Photo_types type)
         {
-
             string filename = "",
                    ext = "",
                    savedFileName = "";
@@ -58,7 +57,7 @@ namespace MusicHub.Helpers
 
             DateTime now = DateTime.Now;
             ext = Path.GetExtension(hpf.FileName);
-            filename = type + "-" + now.Millisecond + now.Second + now.Hour + now.Minute + now.Day + now.Year + ext;
+            filename = type.ToString() + "-" + now.Millisecond + now.Second + now.Hour + now.Minute + now.Day + now.Year + ext;
 
             savedFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + CMS_TEMP_PATH, filename);
 
@@ -97,7 +96,6 @@ namespace MusicHub.Helpers
 
         public enum Photo_types
         {
-
             CONTENT_PICTURE,
             PROFILE_PICTURE
         }
