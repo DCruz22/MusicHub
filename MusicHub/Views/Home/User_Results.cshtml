@@ -3,3 +3,33 @@
 @{
     Layout = "~/Views/Shared/_Logged_Layout.cshtml";
 }
+<h2>Results</h2>
+<div class="row">
+    @using (Html.BeginForm("User_Results","Home", FormMethod.Get))
+    {
+        <label for="search"><i class="material-icons">search</i></label>
+        <input id="search" name="search" type="search" required>
+    }
+    <p>Showing results of: <i>@ViewBag.Result</i>.</p>
+    <div class="container">
+        @if (Model.Count() > 0)
+        {
+            <div class="row">
+                @foreach (var p in Model)
+                {
+                    <div class="col s12 card">
+                        @Html.ActionLink(p.UserName, "Profile", "User", new { user = p.UserName }, null) / <b>@p.Name @p.LastName</b>
+                        <br />
+                        <p>Joined on: @p.JoinDate.ToShortDateString()</p>
+                        <p>@p.AboutMe</p>
+                    </div>
+                    <br />
+                }
+            </div>
+        }
+        else
+        {
+            <span>No results were found.</span>
+        }
+    </div>
+</div>

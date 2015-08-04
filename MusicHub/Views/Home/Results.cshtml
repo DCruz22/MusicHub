@@ -8,7 +8,7 @@
 <div class="row">
     @using (Ajax.BeginForm(new AjaxOptions()
     {
-        HttpMethod = "Get"
+        HttpMethod = "Get"      
     }))
     {
         <label for="search"><i class="material-icons">search</i></label>
@@ -18,16 +18,17 @@
     <div class="container">
         @if (Model.Count() > 0)
         {
-            foreach (var p in Model)
-            {
-                <div class="section">
-                    @Html.ActionLink( p.User.UserName, "Profile", "User", new { user = p.User.UserName }) / @Html.ActionLink(p.Project.ProjectName, "Detail", "Project", new { project = p.Project.ProjectName })
+            <div class="row">
+                @foreach (var p in Model)
+                {
+                <div class="col s12 card">
+                    @Html.ActionLink(p.User.UserName, "Profile", "User", new { user = p.User.UserName }, null) / @Html.ActionLink(p.Project.ProjectName, "Details", "Project", new { projectname = p.Project.ProjectName }, null)
                     <br />
-                    <span>Created: <p>@p.Project.CreationDate</p></span>
-                    <i class="truncate">@p.Project.ProjectDescription</i>
-                    <p>@p.Project.MusicalStyle</p>
+                    <span>Created on: <p>@p.Project.CreationDate.ToShortDateString()</p></span> 
                 </div>
-            }
+                    <br />
+                }
+            </div>
         }
         else
         {

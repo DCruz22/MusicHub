@@ -153,9 +153,6 @@
   <ItemGroup>
     <Content Include="Content\images\profile_pictures\generic_picture.png" />
     <Content Include="Content\style\animate.css" />
-    <Content Include="Content\style\bootstrap.css" />
-    <Content Include="Content\style\bootstrap.min.css" />
-    <Content Include="Content\style\jquery.tokenize.css" />
     <Content Include="Content\style\materialize.css" />
     <Content Include="Content\style\materialize.min.css" />
     <Content Include="Content\style\Site.css" />
@@ -186,14 +183,11 @@
     <Content Include="Content\font\roboto\Roboto-Thin.woff" />
     <Content Include="Content\font\roboto\Roboto-Thin.woff2" />
     <Content Include="scripts\app.js" />
-    <Content Include="scripts\bootstrap.js" />
-    <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\dropzone.js" />
     <Content Include="scripts\jquery-1.11.3.min.js" />
     <Content Include="scripts\jquery.age.js" />
     <Content Include="scripts\jquery.signalR-2.2.0.js" />
     <Content Include="scripts\jquery.signalR-2.2.0.min.js" />
-    <Content Include="scripts\jquery.tokenize.js" />
     <Content Include="scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="scripts\jquery-1.11.3.min.map" />
@@ -384,6 +378,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="public\content_images\" />
     <Folder Include="public\profile_pictures\" />
     <Folder Include="public\temp\" />
   </ItemGroup>

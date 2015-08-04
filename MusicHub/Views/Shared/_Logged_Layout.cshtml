@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="~/Content/style/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/style/materialize.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/style/materialize.css")" rel="stylesheet" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
@@ -16,13 +17,15 @@
             @Html.ActionLink("MusicHub", "Index", "Home", new { area = "" }, new { @class = "brand-logo" })
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
-                    @using (Html.BeginForm("Results", "Home", FormMethod.Get))
+                    @using (Html.BeginForm("User_Results", "Home", FormMethod.Get))
                     {
                         <input type="text" name="search" class="white black-text" placeholder="Search for a User..."/>
                     }
                 </li>
-                <li>@Html.ActionLink("My Profile", "Profile", new { user = WebSecurity.CurrentUserName})</li>
-                <li>@Html.ActionLink("Log out","Logoff", "Account")</li>
+                <li>@Html.ActionLink("My Profile", "Profile", "User", new { user = WebSecurity.CurrentUserName}, null)</li>
+                <li>@Html.ActionLink("Add project..", "Create", "Project")</li>
+                <li class="divider"></li>
+                <li>@Html.ActionLink("Log out", "Logoff", "Account")</li>
             </ul>
         </div>
     </nav>
@@ -38,6 +41,7 @@
     <script src="~/Scripts/jquery-1.11.3.min.js"></script>
     <script src="~/Scripts/materialize.min.js"></script>    
     @Scripts.Render("~/bundles/jqueryval");    
+
     @Scripts.Render("~/bundles/jqueryAjax");
     @Scripts.Render("~/bundles/signalR")
     <script src="@Url.Content("~/scripts/jquery.age.js")"></script>

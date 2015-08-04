@@ -29,6 +29,7 @@ namespace MusicHub.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Project project)
         {
             var proj = await _projrep.FindAsync(a => a.ProjectName == project.ProjectName);
@@ -42,18 +43,25 @@ namespace MusicHub.Controllers
 
             var user = (await _usrrep.FilterAsync(x => x.UserName == WebSecurity.CurrentUserName)).ToList().FirstOrDefault();
 
-            if (user != null)
+            if (user == null)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            project.User = user;
+            project.UserId = user.UserId;
             project.CreationDate = DateTime.Now;
 
-            if(ModelState.IsValid)
+            try
             {
-                _projrep.Create(project);
-                return RedirectToRoute(new { controller = "Project", action = "Detail", projectname = project.ProjectName});
+                if (ModelState.IsValid)
+                {
+                    await _projrep.CreateAsync(project);
+                    return RedirectToRoute(new { controller = "Project", action = "Details", projectname = project.ProjectName });
+                }
+            }
+            catch(Exception ex)
+            {
+                
             }
 
             ViewBag.MusicalStyleId = new SelectList(await _stylerep.AllAsync(), "MusicalStyleId", "MusicalStyleName");
@@ -75,6 +83,13 @@ namespace MusicHub.Controllers
 
         public async Task<ActionResult> Comments(string projectname)
         {
+            Project proj = (await _projrep.FindAsync(x => x.ProjectName == projectname));
+
+            if (proj == null)
+            {
+                return HttpNotFound();
+            }
+
             List<Project_Comment> comments = (await _procomrep.FilterAsync(x => x.Project.ProjectName == projectname))
                                                 .OrderByDescending(x => x.Date)
                                                 .ToList();
@@ -83,36 +98,61 @@ namespace MusicHub.Controllers
             project_comment.PastComments = comments;
 
             ViewBag.ProjectName = projectname;
-            ViewBag.UserName = comments[0].Project.User.UserName;
-            return View(comments);
+            ViewBag.UserName = proj.User.UserName;
+            return View(project_comment);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> Comment(Project_Comment comment, string projectname)
+        public async Task<ActionResult> Comments(string comment, string projectname)
         {
             User user = (await _usrrep.FindAsync(x => x.UserName == WebSecurity.CurrentUserName));
-            comment.User = user;
-            comment.Date = DateTime.Now;
-            comment.Project = (await _projrep.FindAsync(x => x.ProjectName == projectname));
-
-            if(ModelState.IsValid)
+            Project proj = (await _projrep.FindAsync(x => x.ProjectName == projectname));
+            if (proj == null)
             {
-                await _procomrep.CreateAsync(comment);
-
-                return View();
+                return HttpNotFound();
             }
-            return View(comment);
+
+            if (String.IsNullOrEmpty(comment))
+            {
+                ViewBag.Error = "You must write a comment.";
+                return RedirectToAction("Comments", new { projectname = projectname });
+            }
+
+            Project_Comment proj_comment = new Project_Comment(){
+                UserId = user.UserId,
+                Comment = comment,
+                Date = DateTime.Now,
+                ProjectId  = proj.ProjectId
+            };
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    await _procomrep.CreateAsync(proj_comment);
+
+                    return RedirectToAction("Comments", new { projectname = projectname });
+                }
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Error = "There was an error while adding the content. Try again later.";
+                return RedirectToAction("Comments", new { projectname = projectname });
+            }
+            ViewBag.Error = "You must write a comment.";
+            return RedirectToAction("Comments", new { projectname = projectname });
         }
 
         public async Task<ActionResult> Contents(string projectname) 
         {
+            Project proj = (await _projrep.FindAsync(x => x.ProjectName == projectname));
             List<Project_Content> contents = (await _procontrep.FilterAsync(x => x.Project.ProjectName == projectname)).ToList();
             ProjectContentViewModel project_content = new ProjectContentViewModel();
 
             project_content.Past_Contents = contents;
 
-            var user = contents[0].Project.User;
+            var user = proj.User;
 
             ViewBag.IsOwner = IsOwner(user.UserId);
             ViewBag.ProjectName = projectname;
@@ -122,24 +162,33 @@ namespace MusicHub.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> Contents(Project_Content content, string photoTempUrl, string projectname)
+        public async Task<ActionResult> Contents(string photoTempUrl, string projectname, string Name)
         {
-            if(!String.IsNullOrEmpty(photoTempUrl))
+            try
             {
-                string filePath = FilesHelper.movePostFile(photoTempUrl, FilesHelper.Photo_types.CONTENT_PICTURE);
-                User user = (await _usrrep.FindAsync(x => x.UserName == WebSecurity.CurrentUserName));
-                Project proj = (await _projrep.FindAsync(x => x.ProjectName == projectname));
-                content = new Project_Content(){
-                    User = user,
-                    Content = filePath,
-                    Project = proj,
-                    Date = DateTime.Now
-                };
-                await _procontrep.CreateAsync(content);
+                if (!String.IsNullOrEmpty(photoTempUrl) && !String.IsNullOrEmpty(Name))
+                {
+                    string filePath = FilesHelper.movePostFile(photoTempUrl, FilesHelper.Photo_types.CONTENT_PICTURE);
+                    User user = (await _usrrep.FindAsync(x => x.UserName == WebSecurity.CurrentUserName));
+                    Project proj = (await _projrep.FindAsync(x => x.ProjectName == projectname));
+                    Project_Content content = new Project_Content()
+                    {
+                        UserId = user.UserId,
+                        Content = filePath,
+                        ProjectId = proj.ProjectId,
+                        Date = DateTime.Now,
+                        Name = Name
+                    };
+                    await _procontrep.CreateAsync(content);
+                    return RedirectToAction("Contents", new { projectname = projectname });
+                }
+            }
+            catch(Exception ex){
+                ViewBag.Error = "There was an error while adding the content. Try again later.";
                 return RedirectToAction("Contents", new { projectname = projectname });
             }
             ViewBag.Error = "There isn't an image to select.";
-            return View(content);
+            return RedirectToAction("Contents", new { projectname = projectname });
         }
 
         [Authorize]

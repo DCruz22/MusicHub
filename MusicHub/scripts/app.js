@@ -27,6 +27,11 @@
 
 });
 
+function FriendShipSuccess(data) {
+    $('#friendshipContainer-' + data.userFollowedId).html(data.result);
+}
+
+
 function ChangeProfilePictureComplete() {
     window.location.href = "../Home/Index";
 }

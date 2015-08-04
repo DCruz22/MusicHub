@@ -7,7 +7,7 @@
     }
     else
     {
-        Layout = "~/Views/Shared/_Result_Layout.cshtml";        
+        Layout = "~/Views/Shared/_Layout.cshtml";        
     }
 }
 
@@ -17,7 +17,7 @@
             <div class="container">
                 <h3>Project menu</h3>
                 <div class="section">
-                    @Html.ActionLink("Details", "Project", new { projectname = ViewBag.ProjectName })
+                    @Html.ActionLink("Details", "Details", new { projectname = ViewBag.ProjectName })
                 </div>
                 <div class="divider"></div>
                 <div class="section">
@@ -32,7 +32,7 @@
     </div>
     <div class="col s8">
         <div class="row">
-            <div class="col s4">
+            <div class="col s6">
                 @Html.ActionLink((string)ViewBag.UserName, "Profile", "User", new { user = ViewBag.UserName }, null) / @ViewBag.ProjectName
             </div>
             <div class="col s4">
@@ -49,11 +49,11 @@
             {
                 foreach (var p in Model.Past_Contents)
                 {
-                    <div class="col s12 m8 offset-m2 l6 offset-l3">
+                    <div class="col s12">
                         <div class="card-panel grey lighten-5 z-depth-1">
                             <div class="row valign-wrapper">
                                 <div class="col s4">
-                                    <img src="@Url.Content(p.Content)" alt="" class="circle responsive-img">
+                                    <img src="@Url.Content(p.Content)" alt="" class="responsive-img">
                                 </div>
                                 <div class="col s8">
                                     <span class="black-text">
@@ -61,7 +61,7 @@
                                     </span>
                                 </div>
                                 <div class="col s12 right-align">
-                                    <time datetime="@p.Date" class="age"></time>
+                                    <time datetime="@p.Date.ToString("MM/dd/yyyy")" class="age"></time>
                                 </div>
                             </div>
                         </div>
@@ -76,25 +76,22 @@
             }
             @if (ViewBag.IsOwner)
             {
-                using (Html.BeginForm("Comments", "Project", FormMethod.Post))
+                using (Html.BeginForm("Contents", "Project", FormMethod.Post))
                 {
                     <p class="field-validation-error">@ViewBag.Error</p>
                     @Html.Hidden("photoTempUrl")
                     @Html.Hidden("projectname", (string)ViewBag.ProjectName)
                     <div class="col s12">
                         <span>Name:</span>
-                        @Html.TextBoxFor(x => x.New_Content.Name)
-                    </div>
-                    <div class="col s12">
-                        @Html.ValidationMessageFor(x => x.New_Content.Name)
+                        @Html.TextBox("Name")
                     </div>
                     <div class="col s12 right-align">
-                        <input type="submit" value="Comment" class="btn green darken-3" />
+                        <input type="submit" value="Add" class="btn green darken-3" />
                     </div>
                 }
                 <div class="row">
                     <div class="col s12">
-                        <form method="post" class="dropzone card" id="myDropZone" role="form">
+                        <form method="post" class="dropzone card center" id="myDropZone" role="form">
                             <div id="dropzone">
                                 <div class="dz-default dz-message"><span>Drop or select files here to upload</span></div>
                             </div>

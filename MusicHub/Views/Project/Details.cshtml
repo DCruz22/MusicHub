@@ -1,7 +1,14 @@
 ﻿@model MusicHub.Models.Project
 @using MusicHub.Helpers
 @{
-    Layout = "~/Views/Shared/_Logged_Layout.cshtml";
+    if (WebSecurity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Logged_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 }
 <div class="row">
     <div class="col s4">
@@ -9,7 +16,7 @@
             <div class="container">
                 <h3>Project menu</h3>
                 <div class="section">
-                    @Html.ActionLink("Details", "Project", new { projectname = Model.ProjectName })
+                    @Html.ActionLink("Details", "Details", new { projectname = Model.ProjectName })
                 </div>
                 <div class="divider"></div>
                 <div class="section">
@@ -24,7 +31,7 @@
     </div>
     <div class="col s8">
         <div class="row">
-            <div class="col s4">
+            <div class="col s8">
                 @Html.ActionLink(Model.User.UserName, "Profile", "User", new { user = Model.User.UserName }, null) / @Model.ProjectName
             </div>
             <div class="col s4">
@@ -40,23 +47,23 @@
         <div class="row">
             <div class="col s6">
                 <span>Project name:</span>
-                <i class="black darken-1">@Model.ProjectName</i>
+                <i>@Model.ProjectName</i>
             </div>
             <div class="col s6">
                 <span>Musical style:</span>
-                <i class="black darken-1">@Model.MusicalStyle.MusicalStyleName</i>
+                <i>@Model.MusicalStyle.MusicalStyleName</i>
             </div>
             <div class="col s6">
                 <span>Created on:</span>
-                <i class="black darken-1">@Model.CreationDate.ToShortDateString()</i>
+                <i>@Model.CreationDate.ToShortDateString()</i>
             </div>
             <div class="col s6">
                 <span>Authored by:</span>
-                <i class="black darken-1">@Model.User.UserName</i>
+                <i>@Model.User.UserName</i>
             </div>
             <div class="col s12">
                 <span>Description:</span>
-                <i class="black darken-1">@Model.ProjectDescription</i>
+                <i>@Model.ProjectDescription</i>
             </div>
         </div>
     </div>

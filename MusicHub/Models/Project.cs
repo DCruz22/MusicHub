@@ -20,9 +20,11 @@ namespace MusicHub.Models
         public virtual User User { get; set; }
 
         [Required]
+        [Display(Name = "Name")]
         public string ProjectName { get; set; }
 
         [Required]
+        [Display(Name = "Description")]
         public string ProjectDescription { get; set; }
 
         public DateTime CreationDate { get; set; }

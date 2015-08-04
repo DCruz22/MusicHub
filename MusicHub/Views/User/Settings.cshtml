@@ -16,10 +16,6 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(x => x.UserId)
         @Html.HiddenFor(x => x.BirthDate)
-        @Html.HiddenFor(x => x.GenderId)
-        @Html.HiddenFor(x => x.JoinDate)
-        @Html.HiddenFor(x => x.PhotoUrl)
-        @Html.HiddenFor(x => x.UserName)
 
         <div class="col s8">
             @Html.ValidationSummary(true)

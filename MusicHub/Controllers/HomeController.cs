@@ -35,6 +35,7 @@ namespace MusicHub.Controllers
         public async Task<ActionResult> User_Results(string search)
         {
             SearchUserAlgorithm searchuser = new SearchUserAlgorithm(search);
+            ViewBag.Result = search;
             return View(await searchuser.SearchUserAsync());
         }
     }

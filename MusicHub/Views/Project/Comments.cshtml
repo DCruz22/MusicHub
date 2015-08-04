@@ -1,7 +1,14 @@
 ﻿@model MusicHub.ViewModels.ProjectCommentViewModel
 
 @{
-    Layout = "~/Views/Shared/_Logged_Layout.cshtml";
+    if(WebSecurity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Logged_Layout.cshtml";        
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";        
+    }
 }
 
 <div class="row">
@@ -10,7 +17,7 @@
             <div class="container">
                 <h3>Project menu</h3>
                 <div class="section">
-                    @Html.ActionLink("Details", "Project", new { projectname = ViewBag.ProjectName })
+                    @Html.ActionLink("Details", "Details", new { projectname = ViewBag.ProjectName })
                 </div>
                 <div class="divider"></div>
                 <div class="section">
@@ -25,7 +32,7 @@
     </div>
     <div class="col s8">
         <div class="row">
-            <div class="col s4">
+            <div class="col s8">
                 @Html.ActionLink((string)ViewBag.UserName , "Profile", "User", new { user = ViewBag.UserName }, null) / @ViewBag.ProjectName
             </div>
             <div class="col s4">
@@ -42,19 +49,22 @@
             {
                 foreach (var p in Model.PastComments)
                 {
-                    <div class="col s12 m8 offset-m2 l6 offset-l3">
+                    <div class="col s12">
                         <div class="card-panel grey lighten-5 z-depth-1">
                             <div class="row valign-wrapper">
-                                <div class="col s2">
-                                    <img src="@Url.Content(p.User.PhotoUrl)" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s10">
-                                    <span class="black-text">
-                                        @p.Comment
-                                    </span>
-                                </div>
-                                <div class="col s12 right-align">
-                                    <time datetime="@p.Date" class="age"></time>
+                                <div class="row">
+                                    <div class="col s2">
+                                        <img src="@Url.Content(p.User.PhotoUrl)" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                                        <p>@p.User.UserName</p>
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            @p.Comment
+                                        </span>
+                                    </div>
+                                    <div class="col s12 right-align">
+                                        <time datetime="@p.Date.ToString("MM/dd/yyyy")" class="age"></time>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -64,18 +74,19 @@
             else
             {
                 <div class="col s12">
-                    <p>No comments on this project.</p>
-                    <p>Be the first to add one.</p>
+                    <b>No comments on this project.</b>
+                    <i>Be the first to add one.</i>
                 </div>
             }
             @if (WebSecurity.IsAuthenticated)
                 {
                     using (Html.BeginForm("Comments", "Project", FormMethod.Post))
                     {
+                        @Html.ValidationSummary(true);
                         @Html.Hidden("projectname", (string)ViewBag.ProjectName)
                         <div class="col s12">
                             <span>New comment:</span>
-                            @Html.TextBoxFor(x => x.NewComment.Comment)
+                            @Html.TextBox("comment")
                         </div>
                         <div class="col s12">
                             @Html.ValidationMessageFor(x => x.NewComment.Comment)
@@ -85,7 +96,6 @@
                         </div>
                     }
                 }
-            }
         </div>
     </div>
 </div>

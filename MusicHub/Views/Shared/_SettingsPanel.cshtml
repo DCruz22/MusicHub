@@ -8,9 +8,5 @@
         <div class="section">
             @Html.ActionLink("Change profile picture", "ChangeProfilePicture", new { controller = "User" }, new { user = WebSecurity.CurrentUserName })
         </div>
-        <div class="divider"></div>
-        <div class="section">
-            @Html.ActionLink("Preference settings", "Preferences", new { controller = "User" }, new { user = WebSecurity.CurrentUserName })
-        </div>
     </div>
 </div>

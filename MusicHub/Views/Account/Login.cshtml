@@ -1,23 +1,30 @@
 ﻿@model MusicHub.Models.LoginModel
-
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="card">
+        <h2>Login</h2>
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
 
-<h2>Login</h2>
-
-<div class="container center card">
-    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-
-        @Html.TextBoxFor(x => x.UserName, new { @class = "", @placeholder = "Username" })
-        @Html.ValidationMessageFor(x => x.UserName)
-        <br />
-        @Html.TextBoxFor(x => x.Password, new { @class = "", @placeholder = "Password", @type = "Password" })
-        @Html.ValidationMessageFor(x => x.Password)
-        <br />
-        <input type="submit" value="Log in" class="btn blue darken-2" />
-    }
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="row">
+                <div class="col s12">
+                    @Html.TextBoxFor(x => x.UserName, new { @class = "", @placeholder = "Username" })
+                </div>
+                <div class="col s12">
+                    @Html.ValidationMessageFor(x => x.UserName)
+                </div>
+                <div class="col s12">
+                    @Html.TextBoxFor(x => x.Password, new { @class = "", @placeholder = "Password", @type = "Password" })
+                </div>
+                <div class="col s12">
+                    @Html.ValidationMessageFor(x => x.Password)
+                </div>
+                <input type="submit" value="Log in" class="btn blue darken-2" />
+            </div>
+        }
+    </div>
 </div>

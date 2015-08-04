@@ -37,10 +37,7 @@ namespace MusicHub.Controllers
             {
                 Friendship friendship = (await _friendrep.FilterAsync(x => x.UserId_follower == WebSecurity.CurrentUserId && x.UserId_followed == usr.UserId)).FirstOrDefault();
 
-                if (friendship != null)
-                {
-                    ViewBag.IsFollowing = true;
-                }
+                ViewBag.IsFollowing = friendship != null;
             }
 
             if(usr != null)
