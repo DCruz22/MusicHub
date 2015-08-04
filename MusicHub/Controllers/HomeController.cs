@@ -21,7 +21,7 @@ namespace MusicHub.Controllers
         [SeguridadAuthorize()]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login", "Account");
         }
 
         public async Task<ActionResult> Results(string search)

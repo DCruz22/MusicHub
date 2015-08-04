@@ -1,0 +1,16 @@
+﻿@model IEnumerable<MusicHub.Models.Project>
+
+<div class="row">
+    @foreach (var p in Model)
+    {
+        <div class="col s12">
+            @Html.ActionLink(p.ProjectName, "Details", "Projects", new { projectname = p.ProjectName}, null)
+        </div>
+        <div class="col s12">
+            <i>@p.ProjectDescription</i>
+        </div>
+        <div class="col s12">
+            <p>Created <time datetime="@p.CreationDate.ToString("MM/dd/yyyy HH:mm:ss")"></time> ago.</p>
+        </div>
+    }
+</div>

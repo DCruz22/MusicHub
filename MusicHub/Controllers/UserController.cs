@@ -21,9 +21,13 @@ namespace MusicHub.Controllers
         private FriendshipsRepository _friendrep = new FriendshipsRepository();
 
         [Authorize]
-        public ActionResult Index(string user)
+        public async Task<ActionResult> Index(string user)
         {
-            return View();
+            User usr = (await _usrrep.FindAsync(x => x.UserName == user));
+            FeedStrategy feed = new FeedStrategy();
+            List<Feed> news = (await feed.GetUserFeedAsync(usr.UserId)).ToList();
+
+            return View(news);
         }
 
         [Authorize]
@@ -31,6 +35,14 @@ namespace MusicHub.Controllers
         public async Task<ActionResult> User_Profile(string user)
         {
             User usr = await _usrrep.FindAsync(x => x.UserName == user);
+            List<Project> projs = (await _projrep.FilterAsync(x => x.User.UserName == user)).ToList();
+
+            UserProfileViewModel profile = new UserProfileViewModel()
+            {
+                User = usr,
+                Projects = projs
+            };
+
             ViewBag.IsOwner = IsOwner(usr.UserId);
 
             if (!IsOwner(usr.UserId))
@@ -40,12 +52,37 @@ namespace MusicHub.Controllers
                 ViewBag.IsFollowing = friendship != null;
             }
 
+            ViewBag.Following = (await _friendrep.FilterAsync(x => x.UserId_follower == usr.UserId)).ToList().Count;
+            ViewBag.Followers = (await _friendrep.FilterAsync(x => x.UserId_followed == usr.UserId)).ToList().Count;
+
             if(usr != null)
             {
-                return View(usr);
+                return View(profile);
             }
-
+             
             return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<ActionResult> Followers(string user)
+        {
+            User usr = await _usrrep.FindAsync(x => x.UserName == user);
+
+            FollowStrategy follow = new FollowStrategy();
+
+            List<User> followers = (await follow.GetUserFollowersAsync(usr.UserId)).ToList();
+
+            return View(followers);
+        }
+
+        public async Task<ActionResult> Following(string user)
+        {
+            User usr = await _usrrep.FindAsync(x => x.UserName == user);
+
+            FollowStrategy follow = new FollowStrategy();
+
+            List<User> followeds = (await follow.GetUserFollowingAsync(usr.UserId)).ToList();
+
+            return View();
         }
 
         public async Task<ActionResult> MyProjects(string user)

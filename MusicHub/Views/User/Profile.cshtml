@@ -1,4 +1,4 @@
-﻿@model MusicHub.Models.User
+﻿@model MusicHub.ViewModels.UserProfileViewModel
 @using MusicHub.Helpers 
 @{
     Layout = "~/Views/Shared/_Logged_Layout.cshtml";
@@ -10,25 +10,31 @@
                 <div class="col s12">
                     @if (ViewBag.IsOwner)
                     {
-                        <a href="@Url.Action("ChangeProfilePicture", new { user = WebSecurity.CurrentUserName})"><img alt="Change" src="@Url.Content(@Model.PhotoUrl)" id="PhotoUrl" class="circle responsive-img" /></a>
+                        <a href="@Url.Action("ChangeProfilePicture", new { user = WebSecurity.CurrentUserName})"><img alt="Change" src="@Url.Content(@Model.User.PhotoUrl)" id="PhotoUrl" class="circle responsive-img" /></a>
                     }
                     else
                     {
-                        <img src="@Url.Content(@Model.PhotoUrl)" id="PhotoUrl" class="circle responsive-img" />
+                        <img src="@Url.Content(@Model.User.PhotoUrl)" id="PhotoUrl" class="circle responsive-img" />
                     }
                 </div>
                 <hr />
                 <div class="col s12">
-                    <h4>@Model.Name @Model.LastName</h4>
-                    <h5><i>@Model.UserName</i></h5>
+                    <h4>@Model.User.Name @Model.User.LastName</h4>
+                    <h5><i>@Model.User.UserName</i></h5>
                 </div>
                 <hr />
                 <div class="col s12">
-                    <p>@Model.Country.CountryName</p>
-                    <p>Joined on @Model.JoinDate.ToShortDateString()</p>
+                    <p>@Model.User.Country.CountryName</p>
+                    <p>Joined on @Model.User.JoinDate.ToShortDateString()</p>
                 </div>
                 <hr />
                 <div class="col s12">
+                    <div class="row">
+                        <div class="col s6">@ViewBag.Following</div>
+                        <div class="col s6">@ViewBag.Followers</div>
+                        <div class="col s6">@Html.ActionLink("Following", "Following", new { user = Model.User.UserName})</div>
+                        <div class="col s6">@Html.ActionLink("Followers", "Followers", new { user = Model.User.UserName })</div>
+                    </div>
                 </div>
             </div>
     </div>
@@ -37,19 +43,18 @@
         {
             @Html.ActionLink("Edit profile", "Settings", "User", new { user = WebSecurity.CurrentUserName }, new { @class = "btn "})
         }
-        @if (WebSecurity.IsAuthenticated && Model.UserName != WebSecurity.CurrentUserName)
+        @if (WebSecurity.IsAuthenticated && Model.User.UserName != WebSecurity.CurrentUserName)
         {
             String isFollowing = ViewBag.IsFollowing ? "Unfollow" : "Follow";
 
             <p>
-                @Ajax.RawActionLink("<span id=\"friendshipContainer-" + Model.UserId + "\"><span id=\"btnfriendship\">" + isFollowing + "</span></span>",
+                @Ajax.RawActionLink("<span id=\"friendshipContainer-" + Model.User.UserId + "\"><span id=\"btnfriendship\">" + isFollowing + "</span></span>",
                                                          "Follow", "User",
-                                                        new { userId = Model.UserId },
+                                                        new { userId = Model.User.UserId },
                                                         new AjaxOptions()
                                                         {
                                                             HttpMethod = "POST",
                                                             OnSuccess = "FriendShipSuccess"
-
                                                         }, new
                                                         {
                                                             @class = "btn blue darken-1"
@@ -57,10 +62,20 @@
             </p>
 
         }
-        <h6><i>@Model.AboutMe</i></h6>
+        <h6><i>@Model.User.AboutMe</i></h6>
         <div class="row">
             <div class="col s12">
-
+                @if (Model.Projects.Count() > 0)
+                {
+                    @Html.Partial("_Projects", Model.Projects)
+                }
+                else
+                {
+                    <div class="container">
+                        <i>You have no projects yet!</i>
+                        @Html.ActionLink("Add a new one", "Create", "Projects")
+                    </div>
+                }
             </div>
         </div>
     </div>

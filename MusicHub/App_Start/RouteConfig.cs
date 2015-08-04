@@ -39,6 +39,18 @@ namespace MusicHub
             );
 
             routes.MapRoute(
+                name: "Follower",
+                url: "Followers/{user}",
+                defaults: new { controller = "User", action = "Followers" }
+            );
+
+            routes.MapRoute(
+                name: "Following",
+                url: "Following/{user}",
+                defaults: new { controller = "User", action = "Following" }
+            );
+
+            routes.MapRoute(
                 name: "Preferences",
                 url: "Settings/Preferences/{user}",
                 defaults: new { controller = "User", action = "Preferences" }

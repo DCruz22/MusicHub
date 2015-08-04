@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MusicHub.Models.User>
+
+<div class="row">
+    @foreach (var p in Model)
+    {
+        <div class="col s12 card">
+            @Html.ActionLink(p.UserName, "Profile", "User", new { user = p.UserName }, null) / <b>@p.Name @p.LastName</b>
+            <br />
+            <p>Joined on: @p.JoinDate.ToShortDateString()</p>
+            <p>@p.AboutMe</p>
+        </div>
+        <br />
+    }
+</div>
+

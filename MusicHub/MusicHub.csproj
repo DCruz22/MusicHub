@@ -151,8 +151,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\images.jpg" />
     <Content Include="Content\images\profile_pictures\generic_picture.png" />
-    <Content Include="Content\style\animate.css" />
     <Content Include="Content\style\materialize.css" />
     <Content Include="Content\style\materialize.min.css" />
     <Content Include="Content\style\Site.css" />
@@ -184,6 +184,7 @@
     <Content Include="Content\font\roboto\Roboto-Thin.woff2" />
     <Content Include="scripts\app.js" />
     <Content Include="scripts\dropzone.js" />
+    <Content Include="scripts\imagelightbox.min.js" />
     <Content Include="scripts\jquery-1.11.3.min.js" />
     <Content Include="scripts\jquery.age.js" />
     <Content Include="scripts\jquery.signalR-2.2.0.js" />
@@ -293,6 +294,8 @@
     <Compile Include="Data\Reps\User_MusicalStylesRepository.cs">
       <DependentUpon>RepositoryTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\StrategyAlgorithms\FeedStrategy.cs" />
+    <Compile Include="Data\StrategyAlgorithms\FollowStrategy.cs" />
     <Compile Include="Data\StrategyAlgorithms\SearchProjectsAlgorithm.cs" />
     <Compile Include="Data\StrategyAlgorithms\SearchUserAlgorithm.cs" />
     <Compile Include="Data\StrategyAlgorithms\SuggestedProjectAlgorithm.cs" />
@@ -341,6 +344,7 @@
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectCommentViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -357,18 +361,20 @@
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\Comments.cshtml" />
-    <Content Include="Views\User\Suggestions.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\MyProjects.cshtml" />
     <Content Include="Views\User\Settings.cshtml" />
     <Content Include="Views\User\Preferences.cshtml" />
     <Content Include="Views\Project\Contents.cshtml" />
-    <Content Include="Views\User\Badges.cshtml" />
     <Content Include="Views\User\MyPreferences.cshtml" />
     <Content Include="Views\User\ChangeProfilePicture.cshtml" />
     <Content Include="Views\Shared\_SettingsPanel.cshtml" />
     <Content Include="Views\User\PasswordReset.cshtml" />
     <Content Include="Views\Home\User_Results.cshtml" />
+    <Content Include="Views\User\_Projects.cshtml" />
+    <Content Include="Views\User\Following.cshtml" />
+    <Content Include="Views\User\Followers.cshtml" />
+    <Content Include="Views\User\_UserFollowPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

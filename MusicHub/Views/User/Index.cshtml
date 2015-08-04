@@ -1,7 +1,36 @@
-﻿
+﻿@model IEnumerable<MusicHub.Models.Feed>
+
 @{
     Layout = "~/Views/Shared/_Logged_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>News</h2>
 
+<div class="row">
+    <div class="container">
+        @if (Model.Count() > 0)
+        {
+            <div class="row">
+                @foreach (var p in Model)
+                {
+                    <div class="card">
+                        <div class="col s3 card">
+                            <b>@Html.ActionLink(p.User.UserName, "Profile", "User", new { user = p.User.UserName }, null)</b>
+                        </div>
+                        <div class="col s6">
+                            <i>@p.Action :</i>
+                        </div>
+                        <div class="col s3">
+                            @Html.ActionLink(p.Url, "Details", "Projects", new { projectname = p.Url}, null)
+                        </div>
+                    </div>
+                    <br />
+                }
+            </div>
+        }
+        else
+        {
+            <span><i>Nothing new to see.</i></span>
+        }
+    </div>
+</div>

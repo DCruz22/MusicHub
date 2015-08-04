@@ -13,11 +13,12 @@
     <nav class="light-blue darken-4">
         <div class="nav-wrapper container">
             @Html.ActionLink("MusicHub", "Index", "Home", new { area = "" }, new { @class = "brand-logo" })
+            <i>"A place for musicians"</i>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
                     @using (Html.BeginForm("Results", "Home", FormMethod.Get))
                     {
-                        <input type="text" name="search" class="white black-text" placeholder="Search for a Project..."/>
+                        <input type="text" name="search" class="white black-text" placeholder="Search a project..."/>
                     }
                 </li>
                 <li class="tab">@Html.ActionLink("Log In", "Login", "Account")</li>

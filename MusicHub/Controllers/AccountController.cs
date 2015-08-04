@@ -27,6 +27,7 @@ namespace MusicHub.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [SeguridadAuthorize()]
         [ValidateAntiForgeryToken()]
         public async Task<ActionResult> Login(LoginModel model)
         {

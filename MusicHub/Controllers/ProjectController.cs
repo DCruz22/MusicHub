@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using MusicHub.Models;
 using MusicHub.ViewModels;
 using MusicHub.Data.Reps.Reps;
+using MusicHub.Data.Reps;
 using System.Threading.Tasks;
 using MusicHub.Helpers;
 
@@ -15,10 +16,10 @@ namespace MusicHub.Controllers
     public class ProjectController : Base
     {
         // GET: Project
-        private ProjectsRepository _projrep = new ProjectsRepository();
         private Project_CommentsRepository _procomrep = new Project_CommentsRepository();
         private Project_ContentsRepository _procontrep = new Project_ContentsRepository();
         private MusicalStylesRepository _stylerep = new MusicalStylesRepository();
+        private FeedsRepository _feedrep = new FeedsRepository();
 
         [Authorize]
         public ActionResult Create()
@@ -50,12 +51,20 @@ namespace MusicHub.Controllers
 
             project.UserId = user.UserId;
             project.CreationDate = DateTime.Now;
-
+            
             try
             {
                 if (ModelState.IsValid)
                 {
+                    Feed feed = new Feed()
+                    {
+                        UserId = user.UserId,
+                        Action = user.UserName + "Has created a new project",
+                        Url = project.ProjectName
+                    };
+
                     await _projrep.CreateAsync(project);
+                    await _feedrep.CreateAsync(feed);
                     return RedirectToRoute(new { controller = "Project", action = "Details", projectname = project.ProjectName });
                 }
             }
@@ -91,7 +100,7 @@ namespace MusicHub.Controllers
             }
 
             List<Project_Comment> comments = (await _procomrep.FilterAsync(x => x.Project.ProjectName == projectname))
-                                                .OrderByDescending(x => x.Date)
+                                                .OrderBy(x => x.Date)
                                                 .ToList();
             ProjectCommentViewModel project_comment = new ProjectCommentViewModel();
 
