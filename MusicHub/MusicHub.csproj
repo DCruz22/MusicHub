@@ -37,6 +37,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">
@@ -203,6 +204,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RepositoryTemplate.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\musichub.pubxml" />
     <None Include="scripts\jquery.validate-vsdoc.js" />
     <Content Include="scripts\jquery.validate.js" />
     <Content Include="scripts\jquery.validate.min.js" />

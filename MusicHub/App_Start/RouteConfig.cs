@@ -51,6 +51,12 @@ namespace MusicHub
             );
 
             routes.MapRoute(
+                name: "News",
+                url: "News/{user}",
+                defaults: new { controller = "User", action = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "Preferences",
                 url: "Settings/Preferences/{user}",
                 defaults: new { controller = "User", action = "Preferences" }
