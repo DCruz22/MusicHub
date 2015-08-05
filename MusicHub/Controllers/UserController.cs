@@ -82,7 +82,7 @@ namespace MusicHub.Controllers
 
             List<User> followeds = (await follow.GetUserFollowingAsync(usr.UserId)).ToList();
 
-            return View();
+            return View(followeds);
         }
 
         public async Task<ActionResult> MyProjects(string user)

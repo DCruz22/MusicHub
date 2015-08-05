@@ -15,7 +15,7 @@ namespace MusicHub.Data.StrategyAlgorithms
         {
             List<Friendship> following = (_friendrep.Filter(x => x.UserId_follower == userId)).ToList();
 
-            List<User> users = null;
+            List<User> users = new List<User>();
 
             foreach(Friendship friend in following)
             {
@@ -29,7 +29,7 @@ namespace MusicHub.Data.StrategyAlgorithms
         {
             List<Friendship> following = (await _friendrep.FilterAsync(x => x.UserId_follower == userId)).ToList();
 
-            List<User> users = null;
+            List<User> users = new List<User>();
 
             foreach (Friendship friend in following)
             {
@@ -43,7 +43,7 @@ namespace MusicHub.Data.StrategyAlgorithms
         {
             List<Friendship> following = (_friendrep.Filter(x => x.UserId_followed == userId)).ToList();
 
-            List<User> users = null;
+            List<User> users = new List<User>();
 
             foreach (Friendship friend in following)
             {
@@ -57,7 +57,7 @@ namespace MusicHub.Data.StrategyAlgorithms
         {
             List<Friendship> following = (await _friendrep.FilterAsync(x => x.UserId_followed == userId)).ToList();
 
-            List<User> users = null;
+            List<User> users = new List<User>();
 
             foreach (Friendship friend in following)
             {

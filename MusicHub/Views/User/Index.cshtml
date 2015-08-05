@@ -20,8 +20,8 @@
                         <div class="col s6">
                             <i>@p.Action :</i>
                         </div>
-                        <div class="col s3">
-                            @Html.ActionLink(p.Url, "Details", "Projects", new { projectname = p.Url}, null)
+                        <div class="col s3 left-align">
+                            @Html.ActionLink(p.Url, "Details", "Project", new { projectname = p.Url}, null)
                         </div>
                     </div>
                     <br />

@@ -64,7 +64,8 @@
         }
         <h6><i>@Model.User.AboutMe</i></h6>
         <div class="row">
-            <div class="col s12">
+            <div class="col s12 left-align">
+                <h3>My projects</h3>
                 @if (Model.Projects.Count() > 0)
                 {
                     @Html.Partial("_Projects", Model.Projects)
@@ -80,3 +81,10 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".age").age();
+        });
+    </script>
+}

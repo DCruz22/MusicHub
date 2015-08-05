@@ -59,7 +59,7 @@ namespace MusicHub.Controllers
                     Feed feed = new Feed()
                     {
                         UserId = user.UserId,
-                        Action = user.UserName + "Has created a new project",
+                        Action = user.UserName + " Has created a new project",
                         Url = project.ProjectName
                     };
 

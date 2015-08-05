@@ -1,16 +1,23 @@
 ﻿@model IEnumerable<MusicHub.Models.Project>
 
-<div class="row">
+<div class="row card center">
     @foreach (var p in Model)
     {
         <div class="col s12">
-            @Html.ActionLink(p.ProjectName, "Details", "Projects", new { projectname = p.ProjectName}, null)
+            @Html.ActionLink(p.ProjectName, "Details", "Project", new { projectname = p.ProjectName}, null)
         </div>
         <div class="col s12">
             <i>@p.ProjectDescription</i>
         </div>
         <div class="col s12">
-            <p>Created <time datetime="@p.CreationDate.ToString("MM/dd/yyyy HH:mm:ss")"></time> ago.</p>
+            <p>Created <time datetime="@p.CreationDate.ToString("MM/dd/yyyy HH:mm:ss")" class="age"></time></p>
         </div>
     }
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".age").age();
+        });
+    </script>
+}
